@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -44,7 +45,7 @@ public class SearchViewController implements Initializable {
     }
 
     @FXML
-    void searchButtonClicked(ActionEvent event) throws IOException, InterruptedException {
+    void searchButtonClicked(MouseEvent event) throws IOException, InterruptedException {
             userCardLayout.setVisible(true);
            scrollPane.setVisible(true);
 

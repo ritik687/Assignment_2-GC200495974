@@ -13,3 +13,45 @@
 {
     -fx-font-size: 30pt;
 }
+
+.headerInstagramLabel{
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 25pt;
+}
+
+.white-background{
+    -fx-background-color: white;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.round-layout{
+    -fx-border-radius: 50;
+    -fx-border-color: #D7d7d7;
+}
+
+.selected {
+    -fx-background-color: #f3f3f3;
+}
+.mouse-moved :hover{
+    -fx-background-color: #e4e4e4;
+}
+
+.sideBar-separator{
+    -fx-background-color: black;
+}
+.search-separator{
+    -fx-background-color: #d7d7d7;
+}
+
+.button-round-layout{
+    -fx-border-radius: 0 50 50 0;
+    -fx-border-color: #D7d7d7;
+
+}
+.search-mouse-hover :hover{
+        -fx-background-color: #caf39a;
+        -fx-background-radius: 0 50 50 0;
+}
