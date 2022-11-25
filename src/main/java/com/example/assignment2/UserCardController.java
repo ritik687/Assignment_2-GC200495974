@@ -1,11 +1,19 @@
 package com.example.assignment2;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
-public class UserCardController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class UserCardController implements Initializable {
 
     @FXML
     private Label userNameLabel;
@@ -19,8 +27,14 @@ public class UserCardController {
     @FXML
     private ImageView verifiedImageView;
 
+    @FXML
+    private HBox hBox;
 
+    @FXML
+    private BorderPane borderPane;
 
+    //"ddf542","42adf5","f5aa42","ff5056","bdb2fe","b9e5ff"
+    private String[] colors;
 
 
     public void setData(User user){
@@ -28,14 +42,27 @@ public class UserCardController {
         userNameLabel.setText(user.getUserName());
         fullNameLabel.setText(user.getFullName());
         profileImageView.setImage(new Image(user.getProfilePicture()));
-        System.out.println(user.getIsVerified());
+//        System.out.println(user.getIsVerified());
         if(user.getIsVerified()) {
-            verifiedImageView.setVisible(true);
+            borderPane.setVisible(true);
             verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
         }
-        else
-            verifiedImageView.setVisible(false);
+        else {
+            borderPane.setVisible(false);
+        }
+
+        hBox.setStyle("-fx-background-color: "+colors[(int)(Math.random()*colors.length)]);
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        colors = new String[]{"#f6f509","#f7c59d","#bfa5f7","#b9c5f9","#ff7b78","#6c7293","#ACDDDE","#CAF1DE","#FEF8DD","#F7D8BA"};
+
+    }
+
+    @FXML
+    void getDetails(MouseEvent event) {
+
+    }
 }

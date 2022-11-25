@@ -1,7 +1,6 @@
 .root
 {
-    /*-fx-background-color: linear-gradient(from 400px 400px to 800px 800px, #e2ecd9, #62e7bf);*/
-
+    -fx-background-color: linear-gradient(from 400px 400px to 800px 800px, #e2ecd9, #62e7bf);
     -fx-font-size: 14pt;
 }
 
@@ -17,7 +16,7 @@
 
 .headerInstagramLabel{
     -fx-font-family: "Times New Roman";
-    -fx-font-size: 20pt;
+    -fx-font-size: 25pt;
 }
 
 .white-background{
@@ -41,9 +40,11 @@
 }
 
 .sideBar-separator{
-    -fx-background-color: #f3f3f3;
+    -fx-background-color: black;
 }
-
+.search-separator{
+    -fx-background-color: #d7d7d7;
+}
 
 .button-round-layout{
     -fx-border-radius: 0 50 50 0;
@@ -54,18 +55,3 @@
         -fx-background-color: #caf39a;
         -fx-background-radius: 0 50 50 0;
 }
-
-.shadow{
-    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0), 10,0,0,10);
-}
-
-.user-card-background-radius{
-    -fx-background-radius: 15;
-}
-
-.profileImage{
-    -fx-border-radius: 70 70 70 70;
-    -fx-border-color: black;
-
-}
-

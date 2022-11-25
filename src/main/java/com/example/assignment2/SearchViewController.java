@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -27,9 +28,14 @@ public class SearchViewController implements Initializable {
     @FXML
     private ScrollPane scrollPane;
 
+    @FXML
+    private HBox loadingHboxComment;
 
     @FXML
     private VBox userCardLayout;
+
+    @FXML
+    private Label commentLabel;
 
    /* private int column=0;
     private int row=0;*/
@@ -42,12 +48,16 @@ public class SearchViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
             userCardLayout.setVisible(false);
             scrollPane.setVisible(false);
+            loadingHboxComment.setVisible(true);
+
     }
 
     @FXML
-    void searchButtonClicked(MouseEvent event) throws IOException, InterruptedException {
-            userCardLayout.setVisible(true);
-           scrollPane.setVisible(true);
+    void searchButtonClicked(ActionEvent event) throws IOException, InterruptedException
+    {
+
+                userCardLayout.setVisible(true);
+                 scrollPane.setVisible(true);
 
            String searchTerm = searchTextField.getText();
 
@@ -58,6 +68,7 @@ public class SearchViewController implements Initializable {
            {
                /*if (apiResponse.getTotalResults() >= row)
                {*/
+
                    checkingUser = new User(user.getPosition(), user.getUserID(), user.getUserName(), user.getFullName(), user.getIsPrivate(), user.getIsVerified(), user.getHasAnonymousProfilePicture(), user.getHasHighlightReels(), user.getProfilePicture());
 
 
@@ -73,13 +84,18 @@ public class SearchViewController implements Initializable {
                    GridPane.setMargin(userBox, new Insets(10));
                    row++;
 */
+
                }
 
                 userCardLayout.getChildren().addAll(userCardHBoxes);
 
+                loadingHboxComment.setVisible(false);
 
 
            }
+
+
+
 
 
 
