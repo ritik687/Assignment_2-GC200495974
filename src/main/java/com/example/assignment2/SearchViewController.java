@@ -4,12 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -30,29 +26,26 @@ public class SearchViewController implements Initializable {
     @FXML
     private ScrollPane scrollPane;
 
-    @FXML
-    private Label userNameLabel;
 
     @FXML
-    private VBox vBox;
+    private VBox userCardLayout;
 
-    @FXML
-    private GridPane userContainer;
-
-    private int column=0;
-    private int row=0;
+   /* private int column=0;
+    private int row=0;*/
     private User checkingUser;
+
+    private ArrayList<HBox> userCardHBoxes =new ArrayList<>();
     
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            userContainer.setVisible(false);
+            userCardLayout.setVisible(false);
             scrollPane.setVisible(false);
     }
 
     @FXML
     void searchButtonClicked(ActionEvent event) throws IOException, InterruptedException {
-            userContainer.setVisible(true);
+            userCardLayout.setVisible(true);
            scrollPane.setVisible(true);
 
            String searchTerm = searchTextField.getText();
@@ -62,30 +55,36 @@ public class SearchViewController implements Initializable {
 
            for(User user : apiResponse.getUsers())
            {
-               if (apiResponse.getTotalResults() >= row)
-               {
+               /*if (apiResponse.getTotalResults() >= row)
+               {*/
                    checkingUser = new User(user.getPosition(), user.getUserID(), user.getUserName(), user.getFullName(), user.getIsPrivate(), user.getIsVerified(), user.getHasAnonymousProfilePicture(), user.getHasHighlightReels(), user.getProfilePicture());
-                   System.out.println(user.getIsVerified());
+
+
 
                    FXMLLoader fxmlLoader = new FXMLLoader();
-                   fxmlLoader.setLocation(getClass().getResource("UserCard.fxml"));
-                   HBox userBox = fxmlLoader.load();
+                   fxmlLoader.setLocation(getClass().getResource("user-card-view.fxml"));
+                   HBox userCardBox = fxmlLoader.load();
+                    userCardHBoxes.add(userCardBox);
+
                    UserCardController userCardController = fxmlLoader.getController();
                    userCardController.setData(checkingUser);
-
-             /*  if(column ==6){
-                   column=0;
-                   ++row;
-               }*/
-
-                   userContainer.add(userBox, 1, row + 1);
+                   /*userContainer.add(userBox, 1, row + 1);
                    GridPane.setMargin(userBox, new Insets(10));
                    row++;
+*/
                }
+
+                userCardLayout.getChildren().addAll(userCardHBoxes);
+
+
+
            }
+
+
+
 
     }
 
-}
+//    }
 
 

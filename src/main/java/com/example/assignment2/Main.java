@@ -19,6 +19,9 @@ public class Main extends Application {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
+        APIResponse apiResponse = APIUtility.getUsersFromFile();
+        System.out.println(apiResponse);
+
         launch();
 
     }

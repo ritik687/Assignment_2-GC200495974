@@ -28,8 +28,8 @@ public class UserCardController {
         userNameLabel.setText(user.getUserName());
         fullNameLabel.setText(user.getFullName());
         profileImageView.setImage(new Image(user.getProfilePicture()));
-        System.out.println(user.getIsPrivate());
-        if(user.getIsPrivate()){
+        System.out.println(user.getIsVerified());
+        if(user.getIsVerified()) {
             verifiedImageView.setVisible(true);
             verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
         }

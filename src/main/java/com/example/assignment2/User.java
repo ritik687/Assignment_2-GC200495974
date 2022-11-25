@@ -116,7 +116,8 @@ public class User {
         {
             this.isVerified =isVerified;
         }
-        else{
+        else
+        {
             throw new IllegalArgumentException(String.format(" isVerified has either value true or false"));
         }
     }
