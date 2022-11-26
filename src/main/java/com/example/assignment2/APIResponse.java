@@ -34,13 +34,13 @@ public class APIResponse {
         return searchParameter;
     }
 
-    public ArrayList<User> allUsers(){
+   /* public ArrayList<User> allUsers(){
         ArrayList<User> allUsers= new ArrayList<>();
         for(User user: users){
             allUsers.add(user);
         }
         return allUsers;
-    }
+    }*/
 
 
 

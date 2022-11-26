@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -49,5 +50,12 @@ public class HomeViewController implements Initializable {
         }
         borderPane.setCenter(root);
 
+    }
+
+
+
+    @FXML
+    void InstagramPanelClicked(MouseEvent event) throws IOException {
+        SceneChanger.changeScenes(event, "home-view.fxml","Home");
     }
 }

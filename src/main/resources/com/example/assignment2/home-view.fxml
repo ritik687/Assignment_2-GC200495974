@@ -14,13 +14,13 @@
    <children>
       <BorderPane fx:id="borderPane" layoutX="362.0" prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <Pane prefHeight="86.0" prefWidth="900.0" styleClass="white-background" BorderPane.alignment="CENTER">
+            <Pane prefHeight="70.0" prefWidth="900.0" styleClass="white-background" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="89.0" prefWidth="900.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="900.0">
                      <children>
-                        <Pane prefHeight="91.0" prefWidth="234.0">
+                        <Pane onMouseClicked="#InstagramPanelClicked" prefHeight="91.0" prefWidth="234.0">
                            <children>
-                              <HBox prefHeight="88.0" prefWidth="241.0">
+                              <HBox prefHeight="91.0" prefWidth="241.0">
                                  <children>
                                     <ImageView fitHeight="56.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

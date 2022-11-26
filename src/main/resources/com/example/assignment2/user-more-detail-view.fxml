@@ -61,7 +61,7 @@
                         </Circle>
                         <VBox prefHeight="204.0" prefWidth="281.0">
                            <children>
-                              <Label fx:id="PostsLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label">
+                              <Label fx:id="PostsLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label" textAlignment="CENTER">
                                  <font>
                                     <Font name="Times New Roman Bold" size="35.0" />
                                  </font>
@@ -78,7 +78,7 @@
                         </VBox>
                         <VBox prefHeight="204.0" prefWidth="281.0">
                            <children>
-                              <Label fx:id="followersLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label">
+                              <Label fx:id="followersLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label" textAlignment="CENTER">
                                  <font>
                                     <Font name="Times New Roman Bold" size="35.0" />
                                  </font>
@@ -95,7 +95,7 @@
                         </VBox>
                         <VBox prefHeight="204.0" prefWidth="281.0">
                            <children>
-                              <Label fx:id="follwingLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label">
+                              <Label fx:id="followingLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label" textAlignment="CENTER">
                                  <font>
                                     <Font name="Times New Roman Bold" size="35.0" />
                                  </font>
@@ -114,7 +114,7 @@
                   </HBox>
                   <VBox prefHeight="170.0" prefWidth="900.0">
                      <children>
-                        <Label fx:id="fullNameLabel" prefHeight="63.0" prefWidth="847.0" text="Full Name">
+                        <Label fx:id="fullNameLabel" alignment="TOP_LEFT" prefHeight="63.0" prefWidth="847.0" text="Full Name" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets left="50.0" top="5.0" />
                            </VBox.margin>

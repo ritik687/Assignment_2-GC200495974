@@ -11,9 +11,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
+import javax.net.ssl.HttpsURLConnection;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -35,7 +43,8 @@ public class UserCardController implements Initializable {
     private HBox hBox;
 
     @FXML
-    private BorderPane borderPane;
+    private Circle profileImageCircle;
+
 
     private ArrayList<User> clickedUser;
 
@@ -47,14 +56,24 @@ public class UserCardController implements Initializable {
 
         userNameLabel.setText(user.getUserName());
         fullNameLabel.setText(user.getFullName());
-        profileImageView.setImage(new Image(user.getProfilePicture()));
-//        System.out.println(user.getIsVerified());
+
+
+        // displaying the image in the circle object.. this is the most tough part in the project
+        String profilePicture= user.getProfilePicture();
+        if(user.getHasAnonymousProfilePicture())
+            profileImageView.setImage(new Image(Main.class.getResourceAsStream("images/noProfileImage.png")));
+        else
+            profileImageView.setImage(new Image(profilePicture));
+
+
+
+        // checking whether the user is verified if yes then display the verified logo
         if(user.getIsVerified()) {
-            borderPane.setVisible(true);
+            verifiedImageView.setVisible(true);
             verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
         }
         else {
-            borderPane.setVisible(false);
+            verifiedImageView.setVisible(false);
         }
 
         hBox.setStyle("-fx-background-color: "+colors[(int)(Math.random()*colors.length)]);
@@ -66,6 +85,9 @@ public class UserCardController implements Initializable {
         colors = new String[]{"#f6f509","#f7c59d","#bfa5f7","#b9c5f9","#ff7b78","#6c7293","#ACDDDE","#CAF1DE","#FEF8DD","#F7D8BA"};
 
     }
+
+
+
 
 
 }

@@ -5,20 +5,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
 
 
 public class SearchViewController implements Initializable {
@@ -51,6 +47,8 @@ public class SearchViewController implements Initializable {
         userCardLayoutVBox.setVisible(false);
         scrollPane.setVisible(false);
         loadingHboxComment.setVisible(true);
+
+
         mappingUserWithHBox =new MappingUserWithHBox();
 
 
@@ -65,7 +63,7 @@ public class SearchViewController implements Initializable {
 
         String searchTerm = searchTextField.getText();
 
-        APIResponse apiResponse = APIUtility.getUsersFromFile();
+        APIResponse apiResponse = APIUtility.getDataFromFile();
 
 
         for (User user : apiResponse.getUsers()) {
@@ -115,7 +113,7 @@ public class SearchViewController implements Initializable {
                         User.addClickedUserFromUserCardBox(mappingUserWithHBox.getAllUsersAndHBoxesInfo().get(userCardBox));
                         System.out.println(User.getClickedUserFromUserCardBox().size());
 
-                        SceneChanger.changeScenes(event, "user-more-detail-view.fxml", "Users Detail Informaiton");
+                        SceneChanger.changeScenes(event, "user-more-detail-view.fxml", "User Profile");
                         User.getClickedUserFromUserCardBox().remove(0);
 
                     } catch (IOException e) {

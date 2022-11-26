@@ -3,6 +3,7 @@ package com.example.assignment2;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,15 +13,19 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("home-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Home");
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("images/insta.png")));
+
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        APIResponse apiResponse = APIUtility.getUsersFromFile();
+      /*  APIResponse apiResponse = APIUtility.getDataFromFile("users.json");
+        APIResponse apiResponse1 =APIUtility.getUserDetailsFromUserName("therock");
         System.out.println(apiResponse);
+        System.out.println(apiResponse1); */
 
         launch();
 
