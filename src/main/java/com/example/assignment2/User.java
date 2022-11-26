@@ -2,6 +2,8 @@ package com.example.assignment2;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class User {
         @SerializedName("position")
         private int position;
@@ -29,6 +31,8 @@ public class User {
         
         @SerializedName("profile_pic_url")
         private String profilePicture;
+
+    private static ArrayList<User> clickedUserFromUserCardBox =new ArrayList<>();
 
     public User(int position, String userID, String userName, String fullName, boolean isPrivate, boolean isVerified, boolean hasAnonymousProfilePicture, boolean hasHighlightReels, String profilePicture) {
         setPosition(position);
@@ -159,5 +163,12 @@ public class User {
 
         else
             throw new IllegalArgumentException(" Profile Picture URL should have length greater than 0");
+    }
+
+    public static void addClickedUserFromUserCardBox(User user){
+        clickedUserFromUserCardBox.add(user);
+    }
+    public static ArrayList<User> getClickedUserFromUserCardBox(){
+        return clickedUserFromUserCardBox;
     }
 }

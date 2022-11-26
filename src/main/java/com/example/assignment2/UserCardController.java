@@ -1,5 +1,7 @@
 package com.example.assignment2;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -10,7 +12,9 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UserCardController implements Initializable {
@@ -33,11 +37,13 @@ public class UserCardController implements Initializable {
     @FXML
     private BorderPane borderPane;
 
+    private ArrayList<User> clickedUser;
+
     //"ddf542","42adf5","f5aa42","ff5056","bdb2fe","b9e5ff"
     private String[] colors;
 
 
-    public void setData(User user){
+    public void setData(User user) throws IOException {
 
         userNameLabel.setText(user.getUserName());
         fullNameLabel.setText(user.getFullName());
@@ -61,8 +67,6 @@ public class UserCardController implements Initializable {
 
     }
 
-    @FXML
-    void getDetails(MouseEvent event) {
 
-    }
 }
+
