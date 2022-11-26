@@ -116,7 +116,7 @@ public class SearchViewController implements Initializable {
                         System.out.println(User.getClickedUserFromUserCardBox().size());
 
                         SceneChanger.changeScenes(event, "user-more-detail-view.fxml", "Users Detail Informaiton");
-
+                        User.getClickedUserFromUserCardBox().remove(0);
 
                     } catch (IOException e) {
                         e.printStackTrace();

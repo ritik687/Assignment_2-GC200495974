@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,32 +12,35 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment2.UserMoreDetailViewController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="white-background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment2.UserMoreDetailViewController">
    <children>
       <BorderPane layoutX="389.0" layoutY="188.0" prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <HBox prefHeight="63.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox onMouseClicked="#backButtonPressed" prefHeight="14.0" prefWidth="117.0">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#backButtonPressed" prefHeight="63.0" prefWidth="901.0">
                      <children>
-                        <Label prefHeight="114.0" prefWidth="181.0" styleClass="transparent" text="Back">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/left-arrow.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
+                        <ImageView fitHeight="76.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/left-arrow.png" />
+                           </image>
                            <HBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="userNameLabel" alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="422.0" styleClass="transparent" text="UserName">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="2.0" top="10.0" />
                            </HBox.margin>
                            <font>
-                              <Font size="23.0" />
+                              <Font size="22.0" />
                            </font>
                         </Label>
+                        <ImageView fx:id="verifiedImageView" fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/verified.png" />
+                           </image>
+                        </ImageView>
                      </children>
                      <HBox.margin>
                         <Insets />
@@ -45,17 +49,97 @@
                </children>
             </HBox>
          </top>
-         <center>
+         <left>
             <VBox prefHeight="382.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="94.0" prefWidth="900.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="900.0" spacing="30.0">
                      <children>
-                        <Circle fx:id="circle" fill="DODGERBLUE" radius="83.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle" fill="#e2ff1f" radius="102.0" stroke="#ffffff00" strokeType="INSIDE">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </Circle>
+                        <VBox prefHeight="204.0" prefWidth="281.0">
+                           <children>
+                              <Label fx:id="PostsLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="35.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="80.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="TOP_CENTER" prefHeight="119.0" prefWidth="198.0" text="Posts">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="204.0" prefWidth="281.0">
+                           <children>
+                              <Label fx:id="followersLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="35.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="80.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="TOP_CENTER" prefHeight="119.0" prefWidth="198.0" text="Followers">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="204.0" prefWidth="281.0">
+                           <children>
+                              <Label fx:id="follwingLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="35.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="80.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="TOP_CENTER" prefHeight="119.0" prefWidth="198.0" text="Following">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
+                  <VBox prefHeight="170.0" prefWidth="900.0">
+                     <children>
+                        <Label fx:id="fullNameLabel" prefHeight="63.0" prefWidth="847.0" text="Full Name">
+                           <VBox.margin>
+                              <Insets left="50.0" top="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Times New Roman Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="categoryLabel" prefHeight="52.0" prefWidth="857.0" text="Category Name">
+                           <VBox.margin>
+                              <Insets left="50.0" top="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="textAreaForBio" prefHeight="151.0" prefWidth="846.0" styleClass="textarea">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="50.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </TextArea>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
-         </center>
+         </left>
       </BorderPane>
    </children>
 </AnchorPane>

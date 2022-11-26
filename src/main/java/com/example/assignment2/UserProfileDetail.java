@@ -35,7 +35,7 @@ public class UserProfileDetail {
     private boolean businessAccount;
 
     @SerializedName("profile_pic_url")
-    private String profilPicture;
+    private String profilePicture;
 
     public String getUserID() {
         return userID;
@@ -77,7 +77,7 @@ public class UserProfileDetail {
         return businessAccount;
     }
 
-    public String getProfilPicture() {
-        return profilPicture;
+    public String getProfilePicture() {
+        return profilePicture;
     }
 }
