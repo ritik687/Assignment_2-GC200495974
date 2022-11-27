@@ -51,6 +51,11 @@ public class UserMoreDetailViewController implements Initializable {
     private ImageView verifiedImageView;
 
 
+    @FXML
+    private Label postsLabel;
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -87,7 +92,7 @@ public class UserMoreDetailViewController implements Initializable {
 
     void loadProfileDetails() throws IOException, InterruptedException
     {
-        UserProfileDetails userProfileDetails = APIUtility.getDetailsFromFile();
+        UserProfileDetails userProfileDetails = APIUtility.getUserProfileDetailsFromFile();
 
         String profilePictureURL = User.getClickedUserFromUserCardBox().get(0).getProfilePicture();
         String response =APIUtility.sendGETRequest(profilePictureURL);
@@ -111,6 +116,9 @@ public class UserMoreDetailViewController implements Initializable {
         followersLabel.setText(format(userProfileDetails.getFollowers()));
         followingLabel.setText(format(userProfileDetails.getFollowing()));
         categoryLabel.setText(userProfileDetails.getCategoryName());
+        postsLabel.setText(Integer.toString(userProfileDetails.getMedias().getTotalPosts()));
+
+
         textAreaForBio.setText(userProfileDetails.getBioText());
         textAreaForBio.setBorder(null);
         

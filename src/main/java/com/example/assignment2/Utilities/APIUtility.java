@@ -1,6 +1,7 @@
 package com.example.assignment2.Utilities;
 
 import com.example.assignment2.Models.APIResponse;
+import com.example.assignment2.Models.Media;
 import com.example.assignment2.Models.UserProfileDetails;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -86,7 +87,7 @@ public class APIUtility {
 
         try (
                 // filereader knows how to access my file system that knows how to give me back the file While Jsonreader know how to parse that file for json data
-                FileReader fileReader = new FileReader("users.json");
+                FileReader fileReader = new FileReader("JSON-Files/users.json");
                 JsonReader jsonReader = new JsonReader(fileReader);
         ) {
             // here we are converting the json into the apiresponse object.
@@ -103,14 +104,14 @@ public class APIUtility {
     }
 
     // this is the testing method for the detil view
-    public static UserProfileDetails getDetailsFromFile() throws IOException, InterruptedException {
+    public static UserProfileDetails getUserProfileDetailsFromFile() throws IOException, InterruptedException {
 
         Gson gson =new Gson();
         UserProfileDetails userProfileDetails =null;
 
         try (
                 // filereader knows how to access my file system that knows how to give me back the file While Jsonreader know how to parse that file for json data
-                FileReader fileReader = new FileReader("userProfileDetails.json");
+                FileReader fileReader = new FileReader("JSON-Files/userProfileDetails.json");
                 JsonReader jsonReader = new JsonReader(fileReader);
         ) {
             // here we are converting the json into the apiresponse object.
@@ -125,6 +126,32 @@ public class APIUtility {
 
 
     }
+
+
+    // this is the testing method for the media
+    public static Media getMediaDetailsFromFile() throws IOException, InterruptedException {
+
+        Gson gson =new Gson();
+        Media medias =null;
+
+        try (
+                // filereader knows how to access my file system that knows how to give me back the file While Jsonreader know how to parse that file for json data
+                FileReader fileReader = new FileReader("JSON-Files/userProfileDetails.json");
+                JsonReader jsonReader = new JsonReader(fileReader);
+        ) {
+            // here we are converting the json into the apiresponse object.
+            medias = gson.fromJson(jsonReader, UserProfileDetails.class);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return medias;
+
+
+    }
+
 
 
     // this method for the image that showing null for the image pattern that is used to fill the circle object

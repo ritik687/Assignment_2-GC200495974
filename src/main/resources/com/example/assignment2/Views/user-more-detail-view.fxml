@@ -61,7 +61,7 @@
                         </Circle>
                         <VBox prefHeight="204.0" prefWidth="281.0">
                            <children>
-                              <Label fx:id="PostsLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label" textAlignment="CENTER">
+                              <Label fx:id="postsLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label" textAlignment="CENTER">
                                  <font>
                                     <Font name="Times New Roman Bold" size="35.0" />
                                  </font>

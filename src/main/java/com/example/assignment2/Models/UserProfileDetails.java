@@ -38,6 +38,10 @@ public class UserProfileDetails {
     @SerializedName("profile_pic_url")
     private String profilePicture;
 
+    // lastMedia in the json format is object not array.
+    @SerializedName("lastMedia")
+    private Media medias;
+
 
     public String getUserID() {
         return userID;
@@ -82,4 +86,9 @@ public class UserProfileDetails {
     public String getProfilePicture() {
         return profilePicture;
     }
+
+    public Media getMedias(){
+        return medias;
+    }
+
 }

@@ -7,4 +7,7 @@ public class Media {
     @SerializedName("count")
     private int totalPosts;
 
+    public int getTotalPosts() {
+        return totalPosts;
+    }
 }
