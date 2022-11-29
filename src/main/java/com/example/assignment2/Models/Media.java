@@ -19,7 +19,7 @@ public class Media {
     }
 
     public List<Post> getPosts(){
-        System.out.println(Arrays.asList(posts));
+
         return Arrays.asList(posts);
     }
 }

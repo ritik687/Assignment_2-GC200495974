@@ -66,6 +66,6 @@ public class HomeViewController implements Initializable {
 
     @FXML
     void InstagramPanelClicked(MouseEvent event) throws IOException {
-        SceneChanger.changeScenes(event, "Views/home-view.fxml","Home");
+        SceneChanger.changeScenes(event, "Views/home-view.fxml","Home Page");
     }
 }

@@ -115,3 +115,15 @@
 }
 
 
+.scrollPane-background{
+    -fx-background-color: #fafafa;
+}
+
+
+.back-button-hover :hover{
+
+    -fx-background-color: #caf39a;
+
+}
+
+

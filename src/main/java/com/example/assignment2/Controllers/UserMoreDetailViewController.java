@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 
 
-public class UserMoreDetailViewController implements Initializable {
+public class UserMoreDetailViewController implements Initializable, UserProfileDetailsInitializable {
 
     @FXML
     private Circle circle;
@@ -70,6 +70,49 @@ public class UserMoreDetailViewController implements Initializable {
     private UserProfileDetails userProfileDetails;
 
 
+
+    @Override
+    public void loadUserProfileDetails(UserProfileDetails userProfileDetail) {
+
+        userProfileDetails = userProfileDetail;
+        if(userProfileDetail!=null)
+        {
+            String response = APIUtility.sendGETRequest(userProfileDetail.getProfilePicture());
+
+            /*if (userProfileDetail.getHasAnonymousProfilePicture() != true) {*/
+                if (response != "Error") {
+                    Image image = new Image(userProfileDetail.getProfilePicture());
+                    circle.setFill(new ImagePattern(image));
+                } else {
+                    circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
+                }
+         /*   } else {
+                circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
+            }*/
+
+            userNameLabel.setText(userProfileDetail.getUserName());
+            fullNameLabel.setText(userProfileDetail.getFullName());
+            followersLabel.setText(APIUtility.formatNumber(userProfileDetail.getFollowers()));
+            followingLabel.setText(APIUtility.formatNumber(userProfileDetail.getFollowing()));
+            categoryLabel.setText(userProfileDetail.getCategoryName());
+            postsLabel.setText(Integer.toString(userProfileDetail.getMedias().getTotalPosts()));
+
+
+            textAreaForBio.setText(userProfileDetail.getBioText());
+            textAreaForBio.setBorder(null);
+
+
+            if (userProfileDetail.getIsVerifiedAccount()) {
+                verifiedImageView.setVisible(true);
+                verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
+            } else {
+                verifiedImageView.setVisible(false);
+            }
+        }
+
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -78,19 +121,6 @@ public class UserMoreDetailViewController implements Initializable {
 
 
 
-       /* Image image =new Image(User.getClickedUserFromUserCardBox().get(0).getProfilePicture());
-            circle.setFill(new ImagePattern(image));
-
-            userNameLabel.setText(User.getClickedUserFromUserCardBox().get(0).getUserName());
-
-        if(User.getClickedUserFromUserCardBox().get(0).getIsVerified()) {
-            verifiedImageView.setVisible(true);
-            verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
-        }
-        else {
-            verifiedImageView.setVisible(false);
-        }
-        fullNameLabel.setText(User.getClickedUserFromUserCardBox().get(0).getFullName());*/
         try {
             loadProfileDetails();
         } catch (IOException e) {
@@ -100,56 +130,55 @@ public class UserMoreDetailViewController implements Initializable {
         }
 
 
-
         // loading details with the help of listview;
 
 
+        if (User.getClickedUserFromBothListViews().size() > 0) {
+            UserProfileDetails userProfileDetails = null;
+            try {
+                userProfileDetails = APIUtility.getUserProfileDetailsFromFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-        UserProfileDetails userProfileDetails = null;
-        try {
-            userProfileDetails = APIUtility.getUserProfileDetailsFromFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        User selectedUser = User.getClickedUserFromBothListViews().get(0);
-        String profilePictureURL = selectedUser.getProfilePicture();
-        String response =APIUtility.sendGETRequest(profilePictureURL);
+            User selectedUser = User.getClickedUserFromBothListViews().get(0);
+            String profilePictureURL = selectedUser.getProfilePicture();
+            String response = APIUtility.sendGETRequest(profilePictureURL);
 
-        if(selectedUser.getHasAnonymousProfilePicture()!=true) {
-            if (response != "Error") {
-                Image image = new Image(profilePictureURL);
-                circle.setFill(new ImagePattern(image));
+            if (selectedUser.getHasAnonymousProfilePicture() != true) {
+                if (response != "Error") {
+                    Image image = new Image(profilePictureURL);
+                    circle.setFill(new ImagePattern(image));
+                } else {
+                    circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
+                }
             } else {
                 circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
             }
+
+            userNameLabel.setText(selectedUser.getUserName());
+            fullNameLabel.setText(selectedUser.getFullName());
+            followersLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowers()));
+            followingLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowing()));
+            categoryLabel.setText(userProfileDetails.getCategoryName());
+            postsLabel.setText(Integer.toString(userProfileDetails.getMedias().getTotalPosts()));
+
+
+            textAreaForBio.setText(userProfileDetails.getBioText());
+            textAreaForBio.setBorder(null);
+
+
+            if (userProfileDetails.getIsVerifiedAccount()) {
+                verifiedImageView.setVisible(true);
+                verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
+            } else {
+                verifiedImageView.setVisible(false);
+            }
+
         }
-        else{
-            circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
-        }
-
-        userNameLabel.setText(selectedUser.getUserName());
-        fullNameLabel.setText(selectedUser.getFullName());
-        followersLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowers()));
-        followingLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowing()));
-        categoryLabel.setText(userProfileDetails.getCategoryName());
-        postsLabel.setText(Integer.toString(userProfileDetails.getMedias().getTotalPosts()));
-
-
-        textAreaForBio.setText(userProfileDetails.getBioText());
-        textAreaForBio.setBorder(null);
-
-
-        if(userProfileDetails.getIsVerifiedAccount()) {
-            verifiedImageView.setVisible(true);
-            verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
-        }
-        else {
-            verifiedImageView.setVisible(false);
-        }
-
     }
 
 
@@ -157,7 +186,7 @@ public class UserMoreDetailViewController implements Initializable {
 
     @FXML
     void backButtonPressed(MouseEvent event) throws IOException {
-            SceneChanger.changeScenes(event, "Views/search-view.fxml","Search");
+            SceneChanger.changeScenes(event, "Views/search-view.fxml","Search Page");
     }
 
 
@@ -217,9 +246,9 @@ public class UserMoreDetailViewController implements Initializable {
     @FXML
     void viewPostsButtonClicked(MouseEvent event) throws IOException {
         media = userProfileDetails.getMedias();
-        SceneChanger.changeScenes(event,"Views/user-posts-view.fxml","Posts",media);
-    }
 
+        SceneChanger.changeScenes(event,"Views/user-posts-view.fxml","Posts",media,userProfileDetails);
+    }
 
 
 

@@ -3,7 +3,10 @@ package com.example.assignment2.Controllers;
 import com.example.assignment2.Main;
 import com.example.assignment2.Models.Media;
 import com.example.assignment2.Models.Post;
+import com.example.assignment2.Models.UserProfileDetails;
 import com.example.assignment2.Utilities.APIUtility;
+import com.example.assignment2.Utilities.SceneChanger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,7 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UserPostsViewController implements Initializable, MediaInitializable {
+public class UserPostsViewController implements Initializable, MediaInitializable, UserProfileDetailsInitializable {
 
     @FXML
     private Button backImageButton;
@@ -28,7 +31,7 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
     private GridPane postsGrid;
 
     @FXML
-    private Label userNameLabel;
+    private Label fullNameLabel;
 
     @FXML
     private ImageView verifiedImageView;
@@ -36,11 +39,7 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
     private int columns = 0;
     private int rows = 1;
 
-
-    @FXML
-    void backButtonPressed(MouseEvent event) {
-
-    }
+    private UserProfileDetails duplicateUserProfileDetail;
 
 
     @Override
@@ -49,7 +48,7 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
     }
 
 
-    // using MediaInitializable that is the easiest way to pass object from on scene to another
+    // using MediaInitializable that is the easiest way to pass object from on scene to another.. this will works as a initialize method.
     @Override
     public void loadMediaDetails(Media media) {
 
@@ -81,6 +80,28 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
                 }
             }
         }
+    }
+
+    @Override
+    public void loadUserProfileDetails(UserProfileDetails userProfileDetail) {
+
+        duplicateUserProfileDetail = userProfileDetail;
+         fullNameLabel.setText(userProfileDetail.getFullName());
+    }
+
+    @FXML
+    void backButtonPressed(ActionEvent event) throws IOException {
+        SceneChanger.changeScenes(event, "Views/user-more-detail-view.fxml","Profile",duplicateUserProfileDetail);
+    }
+
+    @FXML
+    void homeButtonClicked(ActionEvent event) throws IOException {
+        SceneChanger.changeScenes(event,"Views/home-view.fxml","Home Page");
+    }
+
+    @FXML
+    void searchButtonClicked(ActionEvent event) throws IOException {
+        SceneChanger.changeScenes(event, "search-view.fxml", "Search Page");
     }
 }
 

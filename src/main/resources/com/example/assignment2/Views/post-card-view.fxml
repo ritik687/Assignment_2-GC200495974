@@ -22,12 +22,12 @@
             </ImageView>
          </children>
          <VBox.margin>
-            <Insets />
+            <Insets top="10.0" />
          </VBox.margin>
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="commentsLabel" alignment="CENTER" prefHeight="57.0" prefWidth="113.2" text="Comments">
+            <Label fx:id="likesLabel" alignment="CENTER" prefHeight="57.0" prefWidth="113.2" text="Comments">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -42,7 +42,7 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Label fx:id="likesLabel" alignment="CENTER" prefHeight="56.0" prefWidth="113.2" text="Likes">
+            <Label fx:id="commentsLabel" alignment="CENTER" prefHeight="56.0" prefWidth="113.2" text="Likes">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -208,7 +208,7 @@ public class SearchViewController implements Initializable {
                         User.addClickedUserFromUserCardBox(mappingUserWithHBox.getAllUsersAndHBoxesInfo().get(userCardBox));
                         System.out.println(User.getClickedUserFromBothListViews().size());
 
-                        SceneChanger.changeScenes(event, "Views/user-more-detail-view.fxml", "User Profile");
+                        SceneChanger.changeScenes(event, "Views/user-more-detail-view.fxml", "Profile Page");
                         User.getClickedUserFromBothListViews().remove(0);
 
                     } catch (IOException e) {
