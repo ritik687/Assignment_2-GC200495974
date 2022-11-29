@@ -2,6 +2,7 @@ package com.example.assignment2.Utilities;
 
 import com.example.assignment2.Models.APIResponse;
 import com.example.assignment2.Models.Media;
+import com.example.assignment2.Models.Post;
 import com.example.assignment2.Models.UserProfileDetails;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -17,6 +18,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 
 public class APIUtility {
 
@@ -140,7 +142,7 @@ public class APIUtility {
                 JsonReader jsonReader = new JsonReader(fileReader);
         ) {
             // here we are converting the json into the apiresponse object.
-            medias = gson.fromJson(jsonReader, UserProfileDetails.class);
+            medias = gson.fromJson(jsonReader, Media.class);
 
 
 
@@ -151,6 +153,32 @@ public class APIUtility {
 
 
     }
+
+    // this is the testing method for the media
+    public static Post getPostDetailsFromFile() throws IOException, InterruptedException {
+
+        Gson gson =new Gson();
+        Post posts =null;
+
+        try (
+                // filereader knows how to access my file system that knows how to give me back the file While Jsonreader know how to parse that file for json data
+                FileReader fileReader = new FileReader("userProfileDetails.json");
+                JsonReader jsonReader = new JsonReader(fileReader);
+        ) {
+            // here we are converting the json into the apiresponse object.
+            posts = gson.fromJson(jsonReader, Post.class);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return posts;
+
+
+    }
+
+
 
 
 
@@ -182,5 +210,19 @@ public class APIUtility {
         return response;
     }
 
+
+
+    private static String[] suffix = new String[]{"","K", "M", "B", "T"};
+    private static int MAX_LENGTH = 4;
+
+    // this method is used to format the long number to short form
+    public static String formatNumber(double number) {
+        String r = new DecimalFormat("##0E0").format(number);
+        r = r.replaceAll("E[0-9]", suffix[Character.getNumericValue(r.charAt(r.length() - 1)) / 3]);
+        while(r.length() > MAX_LENGTH || r.matches("[0-9]+\\.[a-z]")){
+            r = r.substring(0, r.length()-2) + r.substring(r.length() - 1);
+        }
+        return r;
+    }
 
 }

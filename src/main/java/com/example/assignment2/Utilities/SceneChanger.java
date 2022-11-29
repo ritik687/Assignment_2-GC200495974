@@ -1,6 +1,9 @@
 package com.example.assignment2.Utilities;
 
+import com.example.assignment2.Controllers.MediaInitializable;
 import com.example.assignment2.Main;
+import com.example.assignment2.Models.Media;
+import com.example.assignment2.Models.UserProfileDetails;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -33,4 +36,24 @@ public class SceneChanger {
         stage.setScene(scene);
         stage.show();
     }
+
+
+    public static void changeScenes(MouseEvent event, String fxmlFileName, String title, Media media) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxmlFileName));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        MediaInitializable controller = fxmlLoader.getController();
+        controller.loadMediaDetails(media);
+
+        //get the stage from the ActionEvent
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        // disabling the maximize button.
+        stage.resizableProperty().setValue(false);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
 }

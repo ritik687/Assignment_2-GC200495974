@@ -1,6 +1,7 @@
 package com.example.assignment2.Controllers;
 
 import com.example.assignment2.*;
+import com.example.assignment2.Models.Media;
 import com.example.assignment2.Models.User;
 import com.example.assignment2.Models.UserProfileDetails;
 import com.example.assignment2.Utilities.APIUtility;
@@ -21,6 +22,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
+
+
 
 public class UserMoreDetailViewController implements Initializable {
 
@@ -62,6 +65,9 @@ public class UserMoreDetailViewController implements Initializable {
     @FXML
     private Button viewPostsButton;
 
+    private Media media;
+
+    private UserProfileDetails userProfileDetails;
 
 
     @Override
@@ -126,8 +132,8 @@ public class UserMoreDetailViewController implements Initializable {
 
         userNameLabel.setText(selectedUser.getUserName());
         fullNameLabel.setText(selectedUser.getFullName());
-        followersLabel.setText(format(userProfileDetails.getFollowers()));
-        followingLabel.setText(format(userProfileDetails.getFollowing()));
+        followersLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowers()));
+        followingLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowing()));
         categoryLabel.setText(userProfileDetails.getCategoryName());
         postsLabel.setText(Integer.toString(userProfileDetails.getMedias().getTotalPosts()));
 
@@ -162,7 +168,7 @@ public class UserMoreDetailViewController implements Initializable {
 
         if(User.getClickedUserFromBothListViews().size()>0)
         {
-                UserProfileDetails userProfileDetails = APIUtility.getUserProfileDetailsFromFile();
+                 userProfileDetails = APIUtility.getUserProfileDetailsFromFile();
 
 
                 String profilePictureURL = User.getClickedUserFromBothListViews().get(0).getProfilePicture();
@@ -184,8 +190,8 @@ public class UserMoreDetailViewController implements Initializable {
 
                 userNameLabel.setText(userProfileDetails.getUserName());
                 fullNameLabel.setText(userProfileDetails.getFullName());
-                followersLabel.setText(format(userProfileDetails.getFollowers()));
-                followingLabel.setText(format(userProfileDetails.getFollowing()));
+                followersLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowers()));
+                followingLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowing()));
                 categoryLabel.setText(userProfileDetails.getCategoryName());
                 postsLabel.setText(Integer.toString(userProfileDetails.getMedias().getTotalPosts()));
 
@@ -210,20 +216,11 @@ public class UserMoreDetailViewController implements Initializable {
 
     @FXML
     void viewPostsButtonClicked(MouseEvent event) throws IOException {
-        SceneChanger.changeScenes(event, "Views/user-posts-view.fxml","Posts");
+        media = userProfileDetails.getMedias();
+        SceneChanger.changeScenes(event,"Views/user-posts-view.fxml","Posts",media);
     }
 
 
-    private static String[] suffix = new String[]{"","K", "M", "B", "T"};
-    private static int MAX_LENGTH = 4;
 
-    private static String format(double number) {
-        String r = new DecimalFormat("##0E0").format(number);
-        r = r.replaceAll("E[0-9]", suffix[Character.getNumericValue(r.charAt(r.length() - 1)) / 3]);
-        while(r.length() > MAX_LENGTH || r.matches("[0-9]+\\.[a-z]")){
-            r = r.substring(0, r.length()-2) + r.substring(r.length() - 1);
-        }
-        return r;
-    }
 
 }
