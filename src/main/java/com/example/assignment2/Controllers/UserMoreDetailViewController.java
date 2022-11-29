@@ -67,6 +67,7 @@ public class UserMoreDetailViewController implements Initializable {
         backImageButton.setCursor(Cursor.HAND);
 
 
+
        /* Image image =new Image(User.getClickedUserFromUserCardBox().get(0).getProfilePicture());
             circle.setFill(new ImagePattern(image));
 
@@ -88,21 +89,26 @@ public class UserMoreDetailViewController implements Initializable {
             e.printStackTrace();
         }
 
-    }
 
-    @FXML
-    void backButtonPressed(MouseEvent event) throws IOException {
-            SceneChanger.changeScenes(event, "Views/search-view.fxml","Search");
-    }
 
-    void loadProfileDetails() throws IOException, InterruptedException
-    {
-        UserProfileDetails userProfileDetails = APIUtility.getUserProfileDetailsFromFile();
+        // loading details with the help of listview;
 
-        String profilePictureURL = User.getClickedUserFromUserCardBox().get(0).getProfilePicture();
+
+
+        UserProfileDetails userProfileDetails = null;
+        try {
+            userProfileDetails = APIUtility.getUserProfileDetailsFromFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        User selectedUser = User.getClickedUserFromBothListViews().get(0);
+        String profilePictureURL = selectedUser.getProfilePicture();
         String response =APIUtility.sendGETRequest(profilePictureURL);
 
-        if(User.getClickedUserFromUserCardBox().get(0).getHasAnonymousProfilePicture()!=true) {
+        if(selectedUser.getHasAnonymousProfilePicture()!=true) {
             if (response != "Error") {
                 Image image = new Image(profilePictureURL);
                 circle.setFill(new ImagePattern(image));
@@ -114,10 +120,8 @@ public class UserMoreDetailViewController implements Initializable {
             circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
         }
 
-        userNameLabel.setText(User.getClickedUserFromUserCardBox().get(0).getUserName());
-
-        userNameLabel.setText(userProfileDetails.getUserName());
-        fullNameLabel.setText(userProfileDetails.getFullName());
+        userNameLabel.setText(selectedUser.getUserName());
+        fullNameLabel.setText(selectedUser.getFullName());
         followersLabel.setText(format(userProfileDetails.getFollowers()));
         followingLabel.setText(format(userProfileDetails.getFollowing()));
         categoryLabel.setText(userProfileDetails.getCategoryName());
@@ -126,7 +130,7 @@ public class UserMoreDetailViewController implements Initializable {
 
         textAreaForBio.setText(userProfileDetails.getBioText());
         textAreaForBio.setBorder(null);
-        
+
 
         if(userProfileDetails.getIsVerifiedAccount()) {
             verifiedImageView.setVisible(true);
@@ -136,8 +140,68 @@ public class UserMoreDetailViewController implements Initializable {
             verifiedImageView.setVisible(false);
         }
 
+    }
+
+
+
+
+    @FXML
+    void backButtonPressed(MouseEvent event) throws IOException {
+            SceneChanger.changeScenes(event, "Views/search-view.fxml","Search");
+    }
+
+
+
+    // loading details with the help of graphic list view
+    void loadProfileDetails() throws IOException, InterruptedException
+    {
+
+        if(User.getClickedUserFromBothListViews().size()>0)
+        {
+                UserProfileDetails userProfileDetails = APIUtility.getUserProfileDetailsFromFile();
+
+
+                String profilePictureURL = User.getClickedUserFromBothListViews().get(0).getProfilePicture();
+                String response = APIUtility.sendGETRequest(profilePictureURL);
+
+                if (User.getClickedUserFromBothListViews().get(0).getHasAnonymousProfilePicture() != true) {
+                    if (response != "Error") {
+                        Image image = new Image(profilePictureURL);
+                        circle.setFill(new ImagePattern(image));
+                    } else {
+                        circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
+                    }
+                } else {
+                    circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
+                }
+
+
+                userNameLabel.setText(User.getClickedUserFromBothListViews().get(0).getUserName());
+
+                userNameLabel.setText(userProfileDetails.getUserName());
+                fullNameLabel.setText(userProfileDetails.getFullName());
+                followersLabel.setText(format(userProfileDetails.getFollowers()));
+                followingLabel.setText(format(userProfileDetails.getFollowing()));
+                categoryLabel.setText(userProfileDetails.getCategoryName());
+                postsLabel.setText(Integer.toString(userProfileDetails.getMedias().getTotalPosts()));
+
+
+                textAreaForBio.setText(userProfileDetails.getBioText());
+                textAreaForBio.setBorder(null);
+
+
+                if (userProfileDetails.getIsVerifiedAccount()) {
+                    verifiedImageView.setVisible(true);
+                    verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
+                } else {
+                    verifiedImageView.setVisible(false);
+                }
+
+        }
+
 
     }
+
 
     private static String[] suffix = new String[]{"","K", "M", "B", "T"};
     private static int MAX_LENGTH = 4;

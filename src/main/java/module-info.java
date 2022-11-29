@@ -4,6 +4,8 @@ module com.example.assignment2 {
 
     requires java.net.http;
     requires com.google.gson;
+    requires java.desktop;
+
 
     opens com.example.assignment2 to javafx.fxml, com.google.gson;
     exports com.example.assignment2;

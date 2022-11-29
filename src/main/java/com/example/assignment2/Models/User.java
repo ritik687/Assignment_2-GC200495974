@@ -32,7 +32,9 @@ public class User {
         @SerializedName("profile_pic_url")
         private String profilePicture;
 
-    private  static ArrayList<User> clickedUserFromUserCardBox =new ArrayList<>();
+        private  static ArrayList<User> clickedUserFromBothListViews =new ArrayList<>();
+
+
 
     public User(int position, String userID, String userName, String fullName, boolean isPrivate, boolean isVerified, boolean hasAnonymousProfilePicture, boolean hasHighlightReels, String profilePicture) {
         setPosition(position);
@@ -166,9 +168,19 @@ public class User {
     }
 
     public  static void addClickedUserFromUserCardBox(User user){
-        clickedUserFromUserCardBox.add(user);
+        clickedUserFromBothListViews.add(user);
     }
-    public  static ArrayList<User> getClickedUserFromUserCardBox(){
-        return clickedUserFromUserCardBox;
+    public  static ArrayList<User> getClickedUserFromBothListViews(){
+        return clickedUserFromBothListViews;
+    }
+
+    public String toString(){
+        String listViewString;
+        if(getIsVerified())
+            listViewString= String.format("\t%s☑",getUserName());
+        else
+            listViewString= String.format("\t%s",getUserName());
+
+        return listViewString;
     }
 }

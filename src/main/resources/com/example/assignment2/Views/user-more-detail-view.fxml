@@ -19,9 +19,9 @@
          <top>
             <HBox prefHeight="63.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER_LEFT" onMouseClicked="#backButtonPressed" prefHeight="63.0" prefWidth="901.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="901.0">
                      <children>
-                        <Button fx:id="backImageButton" mnemonicParsing="false" styleClass="transparent">
+                        <Button fx:id="backImageButton" mnemonicParsing="false" onMouseClicked="#backButtonPressed" styleClass="transparent">
                            <graphic>
                               <ImageView fitHeight="76.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

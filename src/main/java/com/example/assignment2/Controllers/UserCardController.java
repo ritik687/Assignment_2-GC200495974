@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+
 public class UserCardController implements Initializable {
 
     @FXML
@@ -46,11 +47,12 @@ public class UserCardController implements Initializable {
         fullNameLabel.setText(user.getFullName());
 
 
-        // displaying the image in the circle object.. this is the most tough part in the project
+
         String profilePicture= user.getProfilePicture();
-        if(user.getHasAnonymousProfilePicture())
+
+        /*if(user.getHasAnonymousProfilePicture())
             profileImageView.setImage(new Image(Main.class.getResourceAsStream("images/noProfileImage.png")));
-        else
+        else*/
             profileImageView.setImage(new Image(profilePicture));
 
 

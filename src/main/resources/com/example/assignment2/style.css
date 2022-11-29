@@ -71,6 +71,7 @@
 
 .textarea{
     -fx-background-color: white;
+    -fx-display-caret: false ;
 }
 
 /*Login button CSS*/
@@ -91,5 +92,10 @@
     -fx-background-color: #0d6dfe;
     -fx-background-radius: 50;
     -fx-font-weight: bold;
+}
+
+
+.black-background{
+    -fx-background-color: #fafafa;
 }
 

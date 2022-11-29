@@ -29,19 +29,19 @@ public class APIUtility {
             String uri= "https://instagram-profile1.p.rapidapi.com/searchuser/"+searchTerm;
             HttpClient client=HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(URI.create(uri))
-                    .header("X-RapidAPI-Key", "5a6139cb9dmsh3555dd78ae2540fp188b1ejsn3f275c01fe24")
+                    .uri(URI.create("https://instagram-profile1.p.rapidapi.com/getprofile/therock"))
+                    .header("X-RapidAPI-Key", "83b0d80e46msh31b77b24d70e08dp1f8d06jsn39771ea54da7")
                     .header("X-RapidAPI-Host", "instagram-profile1.p.rapidapi.com")
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
 
-            /* Commenting this so as to avoid the overwriting the same file.,.
-            HttpResponse<Path> response = client.send(httpRequest,HttpResponse
-                    .BodyHandlers
-                    .ofFile(Paths.get("users.json")));*/
+//             Commenting this so as to avoid the overwriting the same file.,.
+//            HttpResponse<Path> response = client.send(httpRequest,HttpResponse
+//                    .BodyHandlers
+//                    .ofFile(Paths.get("users.json")));
 
 
-            HttpResponse<String> httpResponse = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             System.out.println(httpResponse.body());
 
             Gson gson=new Gson();
@@ -87,7 +87,7 @@ public class APIUtility {
 
         try (
                 // filereader knows how to access my file system that knows how to give me back the file While Jsonreader know how to parse that file for json data
-                FileReader fileReader = new FileReader("JSON-Files/users.json");
+                FileReader fileReader = new FileReader("users.json");
                 JsonReader jsonReader = new JsonReader(fileReader);
         ) {
             // here we are converting the json into the apiresponse object.
@@ -111,7 +111,7 @@ public class APIUtility {
 
         try (
                 // filereader knows how to access my file system that knows how to give me back the file While Jsonreader know how to parse that file for json data
-                FileReader fileReader = new FileReader("JSON-Files/userProfileDetails.json");
+                FileReader fileReader = new FileReader("userProfileDetails.json");
                 JsonReader jsonReader = new JsonReader(fileReader);
         ) {
             // here we are converting the json into the apiresponse object.
@@ -136,7 +136,7 @@ public class APIUtility {
 
         try (
                 // filereader knows how to access my file system that knows how to give me back the file While Jsonreader know how to parse that file for json data
-                FileReader fileReader = new FileReader("JSON-Files/userProfileDetails.json");
+                FileReader fileReader = new FileReader("userProfileDetails.json");
                 JsonReader jsonReader = new JsonReader(fileReader);
         ) {
             // here we are converting the json into the apiresponse object.
