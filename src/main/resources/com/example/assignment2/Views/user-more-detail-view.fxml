@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -20,14 +21,18 @@
                <children>
                   <HBox alignment="CENTER_LEFT" onMouseClicked="#backButtonPressed" prefHeight="63.0" prefWidth="901.0">
                      <children>
-                        <ImageView fitHeight="76.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/left-arrow.png" />
-                           </image>
+                        <Button fx:id="backImageButton" mnemonicParsing="false" styleClass="transparent">
+                           <graphic>
+                              <ImageView fitHeight="76.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/left-arrow.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
-                        </ImageView>
+                        </Button>
                         <Label fx:id="userNameLabel" alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="422.0" styleClass="transparent" text="UserName">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="2.0" top="10.0" />

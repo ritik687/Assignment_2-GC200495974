@@ -60,7 +60,7 @@
 }
 
 .user-card-background-radius{
-    -fx-background-radius: 15;
+    -fx-background-radius: 30;
 }
 
 .profileImage{
@@ -71,7 +71,25 @@
 
 .textarea{
     -fx-background-color: white;
+}
 
+/*Login button CSS*/
 
+.loginButton-HBox{
+    -fx-background-color: #C6F0EE;
+    -fx-border-radius: 50;
+    -fx-border-color: #D7d7d7;
+    -fx-background-radius: 50;
+}
+.loginButton{
+    -fx-text-fill: white;
+    -fx-font-size: 13pt;
+    -fx-font-weight: bold;
+
+}
+.loginButton-hover :hover{
+    -fx-background-color: #0d6dfe;
+    -fx-background-radius: 50;
+    -fx-font-weight: bold;
 }
 

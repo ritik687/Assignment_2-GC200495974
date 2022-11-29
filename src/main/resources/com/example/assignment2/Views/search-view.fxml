@@ -55,7 +55,7 @@
                <children>
                   <HBox fx:id="homeButtonHBox" prefHeight="55.0" prefWidth="68.0" styleClass="search-mouse-hover">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#homeButtonClicked" prefHeight="55.0" prefWidth="68.0" styleClass="transparent">
+                        <Button fx:id="homeImageButton" mnemonicParsing="false" onMouseClicked="#homeButtonClicked" prefHeight="55.0" prefWidth="68.0" styleClass="transparent">
                            <graphic>
                               <ImageView fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -71,7 +71,7 @@
                         <TextField fx:id="searchTextField" prefHeight="50.0" prefWidth="347.0" promptText="Search" styleClass="transparent" />
                         <HBox prefHeight="50.0" prefWidth="102.0">
                            <children>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#searchButtonClicked" prefHeight="65.0" prefWidth="57.0" styleClass="transparent">
+                              <Button fx:id="searchImageButton" alignment="CENTER" mnemonicParsing="false" onAction="#searchButtonClicked" prefHeight="65.0" prefWidth="57.0" styleClass="transparent">
                                  <graphic>
                                     <ImageView fitHeight="36.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

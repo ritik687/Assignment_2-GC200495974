@@ -5,7 +5,9 @@ import com.example.assignment2.Utilities.SceneChanger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -17,7 +19,13 @@ import java.util.ResourceBundle;
 public class HomeViewController implements Initializable {
 
     @FXML
-    private AnchorPane anchorPane;
+    private AnchorPane childAnchorPane;
+
+    @FXML
+    private Button homeButton;
+
+    @FXML
+    private Button searchButton;
 
     @FXML
     private BorderPane borderPane = null;
@@ -25,7 +33,7 @@ public class HomeViewController implements Initializable {
     @FXML
     void homeButtonClicked(MouseEvent event) {
 
-            borderPane.setCenter(anchorPane);
+            borderPane.setCenter(childAnchorPane);
     }
 
     @FXML
@@ -37,7 +45,8 @@ public class HomeViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        homeButton.setCursor(Cursor.HAND);
+        searchButton.setCursor(Cursor.HAND);
 
     }
 

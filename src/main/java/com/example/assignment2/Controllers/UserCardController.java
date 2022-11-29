@@ -4,6 +4,7 @@ import com.example.assignment2.Main;
 import com.example.assignment2.Models.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,11 +33,8 @@ public class UserCardController implements Initializable {
     @FXML
     private HBox hBox;
 
-    @FXML
-    private Circle profileImageCircle;
 
-
-    private ArrayList<User> clickedUser;
+//    private ArrayList<User> clickedUser;
 
     //"ddf542","42adf5","f5aa42","ff5056","bdb2fe","b9e5ff"
     private String[] colors;
@@ -73,6 +71,8 @@ public class UserCardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colors = new String[]{"#f6f509","#f7c59d","#bfa5f7","#b9c5f9","#ff7b78","#6c7293","#ACDDDE","#CAF1DE","#FEF8DD","#F7D8BA"};
+
+        hBox.setCursor(Cursor.HAND);
 
     }
 

@@ -11,6 +11,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -39,12 +41,13 @@ public class SearchViewController implements Initializable {
     private VBox userCardLayoutVBox;
 
     @FXML
-    private AnchorPane userCardAnchorPane;
+    private Button homeImageButton;
+
+    @FXML
+    private Button searchImageButton;
+
 
     private User checkedUser;
-
-
-
 
     private MappingUserWithHBox mappingUserWithHBox;
 
@@ -54,6 +57,8 @@ public class SearchViewController implements Initializable {
         scrollPane.setVisible(false);
         loadingHboxComment.setVisible(true);
 
+        homeImageButton.setCursor(Cursor.HAND);
+        searchImageButton.setCursor(Cursor.HAND);
 
         mappingUserWithHBox =new MappingUserWithHBox();
 
