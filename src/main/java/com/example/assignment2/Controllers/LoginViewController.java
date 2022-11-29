@@ -91,6 +91,7 @@ public class LoginViewController implements Initializable {
         showLabel.setCursor(Cursor.HAND);
         hideLabel.setCursor(Cursor.HAND);
         textFieldHBox.setVisible(false);
+        showLabel.setVisible(false);
 
         loginButton.setDisable(true);
 
@@ -101,9 +102,11 @@ public class LoginViewController implements Initializable {
 
                     if(value.length()>0) {
                         loginButton.setDisable(false);
+                        showLabel.setVisible(true);
                     }
                     else{
                         loginButton.setDisable(true);
+                        showLabel.setVisible(false);
                     }
                 });
             }
