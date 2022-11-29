@@ -59,12 +59,16 @@ public class UserMoreDetailViewController implements Initializable {
     @FXML
     private Label postsLabel;
 
+    @FXML
+    private Button viewPostsButton;
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         backImageButton.setCursor(Cursor.HAND);
+        viewPostsButton.setCursor(Cursor.HAND);
 
 
 
@@ -200,6 +204,13 @@ public class UserMoreDetailViewController implements Initializable {
         }
 
 
+    }
+
+
+
+    @FXML
+    void viewPostsButtonClicked(MouseEvent event) throws IOException {
+        SceneChanger.changeScenes(event, "Views/user-posts-view.fxml","Posts");
     }
 
 

@@ -177,9 +177,9 @@ public class User {
     public String toString(){
         String listViewString;
         if(getIsVerified())
-            listViewString= String.format("\t%s☑",getUserName());
+            listViewString= String.format("@\t%s☑",getUserName());
         else
-            listViewString= String.format("\t%s",getUserName());
+            listViewString= String.format("@\t%s",getUserName());
 
         return listViewString;
     }

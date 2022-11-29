@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -221,7 +222,6 @@ public class LoginViewController implements Initializable {
                                     alert.setHeaderText("CREDENTIALS");
                                     alert.setContentText("\tUser Name : ritik\n\tPassword: ritik");
                                     alert.show();
-
 
                                 }});
 

@@ -145,6 +145,28 @@
                </children>
             </VBox>
          </left>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="110.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="view-home-hBox">
+                     <children>
+                        <Button fx:id="viewPostsButton" mnemonicParsing="false" onMouseClicked="#viewPostsButtonClicked" prefHeight="78.0" prefWidth="198.0" styleClass="transparent" text="View Posts">
+                           <graphic>
+                              <ImageView fitHeight="58.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/post.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Times New Roman" size="24.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

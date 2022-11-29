@@ -99,3 +99,19 @@
     -fx-background-color: #fafafa;
 }
 
+.view-posts-hBox :hover{
+    -fx-background-color: #caf39a;
+    -fx-background-radius: 20 0 20 0;
+}
+
+.view-home-hBox :hover{
+    -fx-background-color: #caf39a;
+    -fx-background-radius: 20 0 20 0;
+}
+
+.view-search-hBox :hover{
+    -fx-background-color: #caf39a;
+    -fx-background-radius: 20 0 20 0;
+}
+
+

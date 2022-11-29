@@ -82,7 +82,7 @@
                         </RadioButton>
                      </children>
                   </HBox>
-                  <HBox fx:id="loadingHboxComment" alignment="CENTER" prefHeight="27.0" prefWidth="519.0">
+                  <HBox fx:id="hBoxComment" alignment="CENTER" prefHeight="27.0" prefWidth="519.0">
                      <children>
                         <Label fx:id="commentLabel" alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="277.0" text="(NOTE: Graphic List View take time to load)">
                            <HBox.margin>

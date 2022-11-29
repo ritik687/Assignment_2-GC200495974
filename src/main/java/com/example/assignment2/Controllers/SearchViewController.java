@@ -32,7 +32,7 @@ public class SearchViewController implements Initializable {
     private ScrollPane scrollPane;
 
     @FXML
-    private HBox loadingHboxComment;
+    private HBox hBoxComment;
 
     @FXML
     private VBox userCardLayoutVBox;
@@ -72,7 +72,7 @@ public class SearchViewController implements Initializable {
         centeredGraphicVBox.setVisible(false);
         listView.setVisible(false);
 
-        loadingHboxComment.setVisible(true);
+        hBoxComment.setVisible(false);
 
         homeImageButton.setCursor(Cursor.HAND);
         searchImageButton.setCursor(Cursor.HAND);
@@ -148,15 +148,12 @@ public class SearchViewController implements Initializable {
                          userCardController.setData(checkedUser);
                            /*userContainer.add(userBox, 1, row + 1);
                            GridPane.setMargin(userBox, new Insets(10));
-                           row++;
-        */
+                           row++; */
 
                      }
 
 
                      userCardLayoutVBox.getChildren().addAll(mappingUserWithHBox.getAllUsersAndHBoxesInfo().keySet());
-
-                     loadingHboxComment.setVisible(false);
 
                      clickedAnyUserCardBoxInUserCardLayout();
 
@@ -176,6 +173,8 @@ public class SearchViewController implements Initializable {
 
         radioButtonsHBox.setVisible(true);
         simpleListViewRadioButton.setSelected(true);
+
+        hBoxComment.setVisible(true);
 
 
 
