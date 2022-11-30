@@ -134,7 +134,7 @@
                               <Font name="Times New Roman Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="categoryLabel" alignment="TOP_LEFT" prefHeight="22.0" prefWidth="850.0" text="Category Name">
+                        <Label fx:id="categoryLabel" alignment="TOP_LEFT" prefHeight="22.0" prefWidth="850.0" styleClass="categoryLabel" text="Category Name">
                            <VBox.margin>
                               <Insets left="50.0" top="5.0" />
                            </VBox.margin>

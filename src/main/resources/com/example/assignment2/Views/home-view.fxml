@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment2.Controllers.HomeViewController">
    <children>
@@ -45,6 +47,29 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>
                         </Pane>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="674.0">
+                           <children>
+                              <HBox fx:id="logoutButtonHBox" alignment="CENTER" prefHeight="54.0" prefWidth="125.0" styleClass="mouse-moved">
+                                 <children>
+                                    <Button mnemonicParsing="false" onMouseClicked="#logoutButtonClicked" prefHeight="82.0" prefWidth="206.0" styleClass="transparent" text="Logout">
+                                       <graphic>
+                                          <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/logout.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font name="Times New Roman" size="20.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                </children>
@@ -54,25 +79,27 @@
             <AnchorPane fx:id="childAnchorPane" prefHeight="590.0" prefWidth="758.0" styleClass="white-background" BorderPane.alignment="CENTER" />
          </center>
          <bottom>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <HBox fx:id="bottomHBox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="450.0" styleClass="mouse-moved">
+                  <HBox fx:id="profileButtonHBox" alignment="CENTER" prefHeight="100.0" prefWidth="450.0" styleClass="mouse-moved">
                      <children>
-                        <Button fx:id="homeButton" mnemonicParsing="false" onMouseClicked="#homeButtonClicked" prefHeight="100.0" prefWidth="446.0" styleClass="transparent" text="HOME">
+                        <Button mnemonicParsing="false" onMouseClicked="#profileButtonClicked" prefHeight="100.0" prefWidth="448.0" styleClass="transparent" text="PROFILE">
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/home.png" />
-                                 </image>
-                              </ImageView>
+                              <Circle fx:id="imageCircle" fill="DODGERBLUE" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                            </graphic>
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
                         </Button>
                      </children>
+                     <HBox.margin>
+                        <Insets right="2.0" />
+                     </HBox.margin>
                   </HBox>
                   <Separator orientation="VERTICAL" prefHeight="200.0" styleClass="sideBar-separator" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="450.0" styleClass="mouse-moved">
+                  <HBox fx:id="searchButtonHBox" alignment="CENTER" prefHeight="100.0" prefWidth="460.0" styleClass="mouse-moved">
                      <children>
-                        <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#searchButtonClicked" prefHeight="100.0" prefWidth="446.0" styleClass="transparent" text="SEARCH">
+                        <Button mnemonicParsing="false" onMouseClicked="#searchButtonClicked" prefHeight="100.0" prefWidth="462.0" styleClass="transparent" text="SEARCH">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -80,6 +107,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
                         </Button>
                      </children>
                   </HBox>

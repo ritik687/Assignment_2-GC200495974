@@ -115,6 +115,27 @@ public class APIUtility {
     }
 
 
+    public static String getMineProfilePictureURL() throws IOException, InterruptedException {
+
+        String uri= "https://instagram-profile1.p.rapidapi.com/getprofile/ritik_mall_";
+        HttpClient client=HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create(uri))
+                .header("X-RapidAPI-Key", "83b0d80e46msh31b77b24d70e08dp1f8d06jsn39771ea54da7")
+                .header("X-RapidAPI-Host", "instagram-profile1.p.rapidapi.com")
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+
+        HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+        Gson gson = new Gson();
+        UserProfileDetails userProfileDetails = gson.fromJson(httpResponse.body(), UserProfileDetails.class);
+
+        return userProfileDetails.getProfilePicture();
+
+    }
+
+
     // this method for the image that showing null for the image pattern that is used to fill the circle object
     // this will check for the image nullable value.
     public  static String sendGETRequest(String requestURL) {

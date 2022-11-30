@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="white-background" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment2.Controllers.UserPostsViewController">
@@ -64,20 +65,16 @@
                <children>
                   <HBox fx:id="homeButtonHBox" alignment="CENTER" prefHeight="50.0" prefWidth="170.0" styleClass="view-home-hBox">
                      <children>
-                        <Button fx:id="homeButton" mnemonicParsing="false" onAction="#homeButtonClicked" prefHeight="86.0" prefWidth="172.0" styleClass="transparent" text="Home">
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/home.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button fx:id="homeButton" mnemonicParsing="false" onAction="#homeButtonClicked" prefHeight="86.0" prefWidth="172.0" styleClass="transparent" text="Profile">
                            <font>
                               <Font name="Times New Roman" size="24.0" />
                            </font>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
+                           <graphic>
+                              <Circle fx:id="imageCircle" fill="DODGERBLUE" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                           </graphic>
                         </Button>
                      </children>
                      <HBox.margin>
@@ -90,7 +87,7 @@
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/search.png" />
+                                    <Image url="@../images/search2.png" />
                                  </image>
                               </ImageView>
                            </graphic>

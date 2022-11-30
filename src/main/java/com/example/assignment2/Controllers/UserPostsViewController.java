@@ -6,6 +6,7 @@ import com.example.assignment2.Main;
 import com.example.assignment2.Models.Media;
 import com.example.assignment2.Models.Post;
 import com.example.assignment2.Models.UserProfileDetails;
+import com.example.assignment2.Utilities.APIUtility;
 import com.example.assignment2.Utilities.SceneChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,6 +48,9 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
     @FXML
     private ImageView verifiedImageView;
 
+    @FXML
+    private Circle imageCircle;
+
     private int columns = 0;
     private int rows = 1;
 
@@ -58,6 +64,26 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
                 backImageButton.setCursor(Cursor.HAND);
                 homeButtonHBox.setCursor(Cursor.HAND);
                 searchButtonHBox.setCursor(Cursor.HAND);
+
+
+
+        String profilePictureURL = null;
+        try {
+            profilePictureURL = APIUtility.getMineProfilePictureURL();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String response = APIUtility.sendGETRequest(profilePictureURL);
+
+        if (response != "Error")
+        {
+            Image image = new Image(profilePictureURL);
+            imageCircle.setFill(new ImagePattern(image));
+        } else {
+            imageCircle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
+        }
     }
 
 
@@ -116,7 +142,8 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
 
     @FXML
     void homeButtonClicked(ActionEvent event) throws IOException {
-        SceneChanger.changeScenes(event,"Views/home-view.fxml","Home Page");
+        System.out.println("Calling API and displaying Ram's Profile. Please wait a little...:)");
+        SceneChanger.changeScenes(event,"Views/home-view.fxml","Ram's Profile");
     }
 
     @FXML

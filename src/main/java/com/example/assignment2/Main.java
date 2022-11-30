@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -16,7 +17,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Views/home-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Login");
+        stage.setTitle("Ram's Profile");
         stage.getIcons().add(new Image(Main.class.getResourceAsStream("images/insta.png")));
 
         //disabling the maximize button
@@ -28,7 +29,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
+        System.out.println("Calling API and displaying Ram's Profile. Please wait a little...:)");
         launch();
 
     }

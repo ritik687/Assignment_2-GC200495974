@@ -20,7 +20,7 @@ import java.io.IOException;
 public class SceneChanger {
 
 
-    public static void changeScenes( ActionEvent event,String fxmlFileName, String title) throws IOException {
+    public static void changeScenes(ActionEvent event,String fxmlFileName, String title) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(Main.class.getResource(fxmlFileName));
         Scene scene = new Scene(fxmlLoader.load());
@@ -53,24 +53,6 @@ public class SceneChanger {
         stage.show();
     }
 
-
-   /* public static void changeScenes(MouseEvent event, String fxmlFileName, String title, Media media) throws IOException {
-
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxmlFileName));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        MediaInitializable controller = fxmlLoader.getController();
-        controller.loadMediaDetails(media);
-
-        //get the stage from the ActionEvent
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle(title);
-        // disabling the maximize button.
-        stage.resizableProperty().setValue(false);
-        stage.setScene(scene);
-        stage.show();
-    }
-*/
     public static void changeScenes(MouseEvent event, String fxmlFileName, String title, User user) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxmlFileName));

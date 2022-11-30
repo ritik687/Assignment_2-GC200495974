@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="white-background" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment2.Controllers.MineProfileDetailsController">
+   <children>
+      <ScrollPane prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <AnchorPane prefHeight="701.0" prefWidth="899.0">
+               <children>
+                  <VBox prefHeight="255.0" prefWidth="900.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="219.0" prefWidth="899.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Circle fx:id="circle" fill="DODGERBLUE" radius="92.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="20.0" left="80.0" top="50.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="254.0" prefWidth="618.0">
+                                 <children>
+                                    <HBox prefHeight="48.0" prefWidth="616.0">
+                                       <children>
+                                          <Label fx:id="userNameLabel" prefHeight="48.0" prefWidth="217.0" text="Label">
+                                             <font>
+                                                <Font name="Times New Roman" size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="27.0" prefWidth="23.0">
+                                             <children>
+                                                <ImageView fx:id="verifiedImageView" fitHeight="21.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../images/verified.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="30.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="556.0" spacing="40.0">
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="95.0">
+                                             <children>
+                                                <Label alignment="CENTER" text="posts">
+                                                   <graphic>
+                                                      <Label fx:id="postsLabel" alignment="CENTER" text="Label">
+                                                         <font>
+                                                            <Font name="Times New Roman" size="20.0" />
+                                                         </font></Label>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="Times New Roman" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="128.0">
+                                             <children>
+                                                <Label alignment="CENTER" text="followers">
+                                                   <graphic>
+                                                      <Label fx:id="followersLabel" alignment="CENTER" text="Label">
+                                                         <font>
+                                                            <Font name="Times New Roman" size="20.0" />
+                                                         </font></Label>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="Times New Roman" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="129.0">
+                                             <children>
+                                                <Label alignment="CENTER" text="following">
+                                                   <graphic>
+                                                      <Label fx:id="followingLabel" alignment="CENTER" text="Label">
+                                                         <font>
+                                                            <Font name="Times New Roman" size="20.0" />
+                                                         </font></Label>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="Times New Roman" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="109.0" prefWidth="556.0">
+                                       <children>
+                                          <VBox prefHeight="110.0" prefWidth="553.0" spacing="5.0">
+                                             <children>
+                                                <Label fx:id="fullNameLabel" prefHeight="27.0" prefWidth="868.0" text="Full Name">
+                                                   <font>
+                                                      <Font name="Times New Roman Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="categoryNameLabel" prefHeight="27.0" prefWidth="868.0" styleClass="categoryLabel" text="Category Name">
+                                                   <font>
+                                                      <Font name="Times New Roman" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="bioLabel" prefHeight="27.0" prefWidth="868.0" text="Bio">
+                                                   <font>
+                                                      <Font name="Times New Roman" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="80.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Separator prefWidth="200.0">
+                           <padding>
+                              <Insets left="50.0" right="50.0" top="20.0" />
+                           </padding>
+                        </Separator>
+                     </children>
+                  </VBox>
+                  <GridPane fx:id="postsGrid" layoutX="51.0" layoutY="301.0" prefHeight="49.0" prefWidth="36.0">
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

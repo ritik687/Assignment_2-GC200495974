@@ -35,7 +35,7 @@ public class UserProfileDetails {
     @SerializedName("is_business")
     private boolean businessAccount;
 
-    @SerializedName("profile_pic_url")
+    @SerializedName("profile_pic_url_hd")
     private String profilePicture;
 
     // lastMedia in the json format is object not array.

@@ -37,7 +37,7 @@
     -fx-background-color: #f3f3f3;
 }
 .mouse-moved :hover{
-    -fx-background-color: #e4e4e4;
+    -fx-background-color: #caf39a;
 }
 
 .sideBar-separator{
@@ -128,4 +128,12 @@
 
 }
 
+.scroll-pane .viewport{
+    -fx-background-color: #f8f9f9;
+}
+
+
+.categoryLabel{
+    -fx-text-fill: #7c7878;
+}
 

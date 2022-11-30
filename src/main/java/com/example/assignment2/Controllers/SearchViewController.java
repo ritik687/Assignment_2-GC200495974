@@ -317,8 +317,10 @@ public class SearchViewController implements Initializable, UserInitializable {
 
 
                 @FXML
-                void homeButtonClicked(MouseEvent event) throws IOException {
-                    SceneChanger.changeScenes(event, "Views/home-view.fxml", "Home Page");
+                void backButtonClicked(MouseEvent event) throws IOException {
+                    System.out.println("Calling API and displaying Ram's Profile. Please wait a little...:)");
+                    SceneChanger.changeScenes(event, "Views/home-view.fxml", "Ram's Profile");
+
                 }
 
                 @FXML

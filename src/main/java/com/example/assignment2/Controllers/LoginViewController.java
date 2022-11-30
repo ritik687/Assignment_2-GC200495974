@@ -140,20 +140,21 @@ public class LoginViewController implements Initializable {
                                 @Override
                                 public void handle(MouseEvent event) {
 
-                                    if(userNameField.getText().equals("ritik") && passwordField.getText().equals("ritik")){
+                                    if(userNameField.getText().equals("ritik_mall_") && passwordField.getText().equals("ritik")){
                                         try {
-                                            SceneChanger.changeScenes(event,"Views/home-view.fxml","Home Page");
+                                            System.out.println("Calling API and displaying Ram's Profile. Please wait a little...:)");
+                                            SceneChanger.changeScenes(event,"Views/home-view.fxml","Ram's Profile");
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                    else if(!userNameField.getText().equals("ritik") && !passwordField.getText().equals("ritik")){
+                                    else if(!userNameField.getText().equals("ritik_mall_") && !passwordField.getText().equals("ritik")){
                                         msgLabel1.setText("Sorry, your password and username both ");
                                         msgLabel2.setText("was incorrect.");
                                         showCredentialsLabel.setVisible(true);
                                     }
 
-                                    else if(!userNameField.getText().equals("ritik")){
+                                    else if(!userNameField.getText().equals("ritik_mall_")){
                                         msgLabel1.setText("Sorry, your username/email/phoneNumber was incorrect. ");
                                         msgLabel2.setText("Please double-check that.");
                                     }
