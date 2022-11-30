@@ -12,10 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -34,6 +37,12 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
     private Label fullNameLabel;
 
     @FXML
+    private HBox homeButtonHBox;
+
+    @FXML
+    private HBox searchButtonHBox;
+
+    @FXML
     private ImageView verifiedImageView;
 
     private int columns = 0;
@@ -44,7 +53,11 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+                verifiedImageView.setVisible(false);
 
+                backImageButton.setCursor(Cursor.HAND);
+                homeButtonHBox.setCursor(Cursor.HAND);
+                searchButtonHBox.setCursor(Cursor.HAND);
     }
 
 
@@ -86,7 +99,14 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
     public void loadUserProfileDetails(UserProfileDetails userProfileDetail) {
 
         duplicateUserProfileDetail = userProfileDetail;
-        fullNameLabel.setText(userProfileDetail.getFullName());
+         fullNameLabel.setText(userProfileDetail.getFullName());
+
+        if (userProfileDetail.getIsVerifiedAccount()) {
+            verifiedImageView.setVisible(true);
+            verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
+        } else {
+            verifiedImageView.setVisible(false);
+        }
     }
 
     @FXML
@@ -101,7 +121,7 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
 
     @FXML
     void searchButtonClicked(ActionEvent event) throws IOException {
-        SceneChanger.changeScenes(event, "search-view.fxml", "Search Page");
+        SceneChanger.changeScenes(event, "Views/search-view.fxml", "Search Page");
     }
 }
 

@@ -62,7 +62,7 @@
          <bottom>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="170.0" styleClass="view-home-hBox">
+                  <HBox fx:id="homeButtonHBox" alignment="CENTER" prefHeight="50.0" prefWidth="170.0" styleClass="view-home-hBox">
                      <children>
                         <Button fx:id="homeButton" mnemonicParsing="false" onAction="#homeButtonClicked" prefHeight="86.0" prefWidth="172.0" styleClass="transparent" text="Home">
                            <graphic>
@@ -84,7 +84,7 @@
                         <Insets bottom="10.0" left="20.0" right="30.0" top="10.0" />
                      </HBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="170.0" styleClass="view-search-hBox">
+                  <HBox fx:id="searchButtonHBox" alignment="CENTER" prefHeight="50.0" prefWidth="170.0" styleClass="view-search-hBox">
                      <children>
                         <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonClicked" prefHeight="131.0" prefWidth="225.0" styleClass="transparent" text="Search">
                            <graphic>

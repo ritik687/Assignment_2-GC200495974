@@ -53,9 +53,20 @@ public class SearchViewController implements Initializable, UserInitializable {
     @FXML
     private HBox radioButtonsHBox;
 
+    @FXML
+    private HBox clearButtonHBox;
+
 
     @FXML
     private VBox centeredGraphicVBox;
+
+    @FXML
+    private Label msgLabel1;
+
+    @FXML
+    private Label msgLabel2;
+
+
 
     private ToggleGroup toggleGroup;
 
@@ -74,9 +85,12 @@ public class SearchViewController implements Initializable, UserInitializable {
         centeredGraphicVBox.setVisible(false);
         listView.setVisible(false);
         hBoxComment.setVisible(false);
-
+        msgLabel1.setVisible(false);
+        msgLabel2.setVisible(false);
+        clearButtonHBox.setVisible(false);
         searchImageButton.setDisable(true);
 
+        clearButtonHBox.setCursor(Cursor.HAND);
         homeImageButton.setCursor(Cursor.HAND);
         searchImageButton.setCursor(Cursor.HAND);
         listView.setCursor(Cursor.HAND);
@@ -95,9 +109,14 @@ public class SearchViewController implements Initializable, UserInitializable {
         searchTextField.textProperty().addListener((observableValue, s, searchText) -> {
                     if(searchText.length()!=0){
                         searchImageButton.setDisable(false);
+                        clearButtonHBox.setVisible(true);
                     }
                     else
+                    {
                         searchImageButton.setDisable(true);
+                        clearButtonHBox.setVisible(false);
+                    }
+
         });
 
 
@@ -166,21 +185,45 @@ public class SearchViewController implements Initializable, UserInitializable {
                 @FXML
                 void searchButtonClicked(ActionEvent event) throws IOException, InterruptedException {
 
-                    radioButtonsHBox.setVisible(true);
-                    simpleListViewRadioButton.setSelected(true);
-
-                    hBoxComment.setVisible(true);
-
-
                     searchTerm = searchTextField.getText();
 
             //        APIResponse apiResponse = APIUtility.getDataFromFile();
                     apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
-                    listView.getItems().clear();
 
-                    listView.getItems().addAll(apiResponse.getUsers());
+                    if(apiResponse.getIsError())
+                    {
+                        msgLabel1.setVisible(true);
+                        msgLabel2.setVisible(true);
+                        radioButtonsHBox.setVisible(false);
 
-                    listView.setVisible(true);
+                        hBoxComment.setVisible(false);
+
+                        centeredGraphicVBox.setVisible(false);
+                        listView.getItems().clear();
+                        userCardLayoutVBox.getChildren().clear();
+
+
+                        listView.setVisible(false);
+                        msgLabel2.setText("\""+searchTerm+"\"");
+                    }
+
+                    else
+                    {
+                        msgLabel1.setVisible(false);
+                        msgLabel2.setVisible(false);
+
+                        radioButtonsHBox.setVisible(true);
+                        hBoxComment.setVisible(true);
+
+                        simpleListViewRadioButton.setSelected(true);
+
+
+
+
+                        listView.getItems().clear();
+                        listView.getItems().addAll(apiResponse.getUsers());
+                        listView.setVisible(true);
+                    }
 
 
                 }
@@ -273,6 +316,12 @@ public class SearchViewController implements Initializable, UserInitializable {
                 @FXML
                 void homeButtonClicked(MouseEvent event) throws IOException {
                     SceneChanger.changeScenes(event, "Views/home-view.fxml", "Home Page");
+                }
+
+                @FXML
+                void clearSearchTextField(MouseEvent event) {
+                        searchTextField.clear();
+
                 }
 
 

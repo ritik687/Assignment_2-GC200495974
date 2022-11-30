@@ -142,7 +142,7 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="textAreaForBio" prefHeight="244.0" prefWidth="799.0" scrollLeft="5.0" scrollTop="5.0" styleClass="textarea">
+                        <TextArea fx:id="textAreaForBio" prefHeight="244.0" prefWidth="799.0" scrollLeft="5.0" scrollTop="5.0" styleClass="textarea" wrapText="true">
                            <VBox.margin>
                               <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
                            </VBox.margin>

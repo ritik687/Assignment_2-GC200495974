@@ -20,7 +20,7 @@
                      <children>
                         <Pane onMouseClicked="#InstagramPanelClicked" prefHeight="91.0" prefWidth="234.0">
                            <children>
-                              <HBox prefHeight="91.0" prefWidth="241.0">
+                              <HBox fx:id="instagramPanelHBox" prefHeight="78.0" prefWidth="227.0">
                                  <children>
                                     <ImageView fitHeight="56.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

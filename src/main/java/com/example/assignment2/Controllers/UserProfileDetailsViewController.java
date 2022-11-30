@@ -209,11 +209,11 @@ public class UserProfileDetailsViewController implements Initializable, UserProf
 
 
             if (passedUserProfileDetail.getIsVerifiedAccount()) {
-                verifiedImageView.setVisible(true);
-                verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
-            } else {
-                verifiedImageView.setVisible(false);
-            }
+            verifiedImageView.setVisible(true);
+            verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
+        } else {
+            verifiedImageView.setVisible(false);
+        }
         }
 
     }

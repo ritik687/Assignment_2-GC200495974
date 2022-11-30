@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,12 +29,15 @@ public class HomeViewController implements Initializable {
     private Button searchButton;
 
     @FXML
+    private HBox instagramPanelHBox;
+
+    @FXML
     private BorderPane borderPane = null;
 
     @FXML
     void homeButtonClicked(MouseEvent event) {
 
-        borderPane.setCenter(childAnchorPane);
+            borderPane.setCenter(childAnchorPane);
     }
 
     @FXML
@@ -47,7 +51,7 @@ public class HomeViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         homeButton.setCursor(Cursor.HAND);
         searchButton.setCursor(Cursor.HAND);
-
+        instagramPanelHBox.setCursor(Cursor.HAND);
     }
 
     private void loadView(String resourceName){
