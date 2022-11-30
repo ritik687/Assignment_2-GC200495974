@@ -1,9 +1,6 @@
 package com.example.assignment2.Utilities;
 
-import com.example.assignment2.Models.APIResponse;
-import com.example.assignment2.Models.Media;
-import com.example.assignment2.Models.Post;
-import com.example.assignment2.Models.UserProfileDetails;
+import com.example.assignment2.Models.*;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
@@ -31,20 +28,20 @@ public class APIUtility {
             String uri= "https://instagram-profile1.p.rapidapi.com/searchuser/"+searchTerm;
             HttpClient client=HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(URI.create("https://instagram-profile1.p.rapidapi.com/getprofile/therock"))
+                    .uri(URI.create(uri))
                     .header("X-RapidAPI-Key", "83b0d80e46msh31b77b24d70e08dp1f8d06jsn39771ea54da7")
                     .header("X-RapidAPI-Host", "instagram-profile1.p.rapidapi.com")
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
 
 //             Commenting this so as to avoid the overwriting the same file.,.
-//            HttpResponse<Path> response = client.send(httpRequest,HttpResponse
-//                    .BodyHandlers
-//                    .ofFile(Paths.get("users.json")));
+/*            HttpResponse<Path> response = client.send(httpRequest,HttpResponse
+                    .BodyHandlers
+                    .ofFile(Paths.get("users.json")));*/
 
 
             HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            System.out.println(httpResponse.body());
+//            System.out.println(httpResponse.body());
 
             Gson gson=new Gson();
             APIResponse apiResponse=gson.fromJson(httpResponse.body(),APIResponse.class);
@@ -53,7 +50,7 @@ public class APIUtility {
 
         }
 
-    public static APIResponse getUserDetailsFromUserName(String userName) throws IOException, InterruptedException {
+   /* public static APIResponse getUserProfileDetailsFromUserName(String userName) throws IOException, InterruptedException {
 
 //        searchTerm =searchTerm.replaceAll(" ","%20");
 
@@ -66,7 +63,7 @@ public class APIUtility {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
 
-         /*    Commenting this so as to avoid the overwriting the same file.,.*/
+         *//*    Commenting this so as to avoid the overwriting the same file.,.*//*
             HttpResponse<Path> response = client.send(httpRequest,HttpResponse
                     .BodyHandlers
                     .ofFile(Paths.get("userProfileDetails.json")));
@@ -79,6 +76,36 @@ public class APIUtility {
         APIResponse apiResponse=gson.fromJson(httpResponse.body(),APIResponse.class);
 
         return apiResponse;
+
+    }*/
+
+
+    public static UserProfileDetails getUserProfileDetailsFromUserName(String userName) throws IOException, InterruptedException {
+
+//        searchTerm =searchTerm.replaceAll(" ","%20");
+
+        String uri= "https://instagram-profile1.p.rapidapi.com/getprofile/"+userName;
+        HttpClient client=HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create(uri))
+                .header("X-RapidAPI-Key", "83b0d80e46msh31b77b24d70e08dp1f8d06jsn39771ea54da7")
+                .header("X-RapidAPI-Host", "instagram-profile1.p.rapidapi.com")
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+
+         /*    Commenting this so as to avoid the overwriting the same file.,.*/
+//        HttpResponse<Path> response = client.send(httpRequest,HttpResponse
+//                .BodyHandlers
+//                .ofFile(Paths.get("userProfileDetails.json")));
+
+
+        HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+//        System.out.println(httpResponse.body());
+
+        Gson gson=new Gson();
+        UserProfileDetails userProfileDetails =gson.fromJson(httpResponse.body(), UserProfileDetails.class);
+
+        return userProfileDetails;
 
     }
 
@@ -102,8 +129,7 @@ public class APIUtility {
         }
         return apiResponse;
 
-
-    }
+        }
 
     // this is the testing method for the detil view
     public static UserProfileDetails getUserProfileDetailsFromFile() throws IOException, InterruptedException {
@@ -201,7 +227,7 @@ public class APIUtility {
                 response = br.readLine();
             }*/
            if(responseCode !=HttpsURLConnection.HTTP_OK){
-                response="Error"; // Here error is erroe while connecting or Content not found;
+                response="Error"; // Here error is error while connecting or Content not found;
             }
         } catch (IOException e) {
 

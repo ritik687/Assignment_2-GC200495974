@@ -15,4 +15,6 @@ module com.example.assignment2 {
     opens com.example.assignment2.Utilities to com.google.gson, javafx.fxml;
     exports com.example.assignment2.Models;
     opens com.example.assignment2.Models to com.google.gson, javafx.fxml;
+    exports com.example.assignment2.Interfaces;
+    opens com.example.assignment2.Interfaces to com.google.gson, javafx.fxml;
 }

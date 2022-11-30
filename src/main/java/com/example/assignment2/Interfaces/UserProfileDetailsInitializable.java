@@ -1,4 +1,4 @@
-package com.example.assignment2.Controllers;
+package com.example.assignment2.Interfaces;
 
 import com.example.assignment2.Models.UserProfileDetails;
 

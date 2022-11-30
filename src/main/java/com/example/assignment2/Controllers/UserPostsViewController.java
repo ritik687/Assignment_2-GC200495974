@@ -1,10 +1,11 @@
 package com.example.assignment2.Controllers;
 
+import com.example.assignment2.Interfaces.MediaInitializable;
+import com.example.assignment2.Interfaces.UserProfileDetailsInitializable;
 import com.example.assignment2.Main;
 import com.example.assignment2.Models.Media;
 import com.example.assignment2.Models.Post;
 import com.example.assignment2.Models.UserProfileDetails;
-import com.example.assignment2.Utilities.APIUtility;
 import com.example.assignment2.Utilities.SceneChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -91,7 +91,7 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
 
     @FXML
     void backButtonPressed(ActionEvent event) throws IOException {
-        SceneChanger.changeScenes(event, "Views/user-more-detail-view.fxml","Profile",duplicateUserProfileDetail);
+        SceneChanger.changeScenes(event, "Views/user-profile-details-view.fxml","Profile",duplicateUserProfileDetail);
     }
 
     @FXML
