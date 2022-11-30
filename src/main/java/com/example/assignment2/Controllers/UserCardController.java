@@ -53,7 +53,7 @@ public class UserCardController implements Initializable {
         /*if(user.getHasAnonymousProfilePicture())
             profileImageView.setImage(new Image(Main.class.getResourceAsStream("images/noProfileImage.png")));
         else*/
-            profileImageView.setImage(new Image(profilePicture));
+        profileImageView.setImage(new Image(profilePicture));
 
 
 

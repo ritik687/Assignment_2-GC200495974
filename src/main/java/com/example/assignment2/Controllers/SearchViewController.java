@@ -30,9 +30,6 @@ public class SearchViewController implements Initializable, UserInitializable {
     private TextField searchTextField;
 
     @FXML
-    private ScrollPane scrollPane;
-
-    @FXML
     private HBox hBoxComment;
 
     @FXML
@@ -104,7 +101,7 @@ public class SearchViewController implements Initializable, UserInitializable {
                     try {
                         searchTerm = searchTextField.getText();
 //                        User.addClickedUserFromUserCardBox(selectedUser);
-                        SceneChanger.changeScenes(event, "Views/user-profile-details-view.fxml", "User Profile", searchTerm, selectedUser);
+                        SceneChanger.changeScenes(event, "Views/user-profile-details-view.fxml", selectedUser.getFullName()+"'s Profile", searchTerm, selectedUser);
 
 //                        User.getClickedUserFromBothListViews().remove(0);
                     } catch (IOException e) {
@@ -115,11 +112,7 @@ public class SearchViewController implements Initializable, UserInitializable {
         });
     }
 
-    @Override
-    public void loadUserDetailsFromListView(String passedSearchTerm, User passedUser) {
-       /*
-        }*/
-    }
+
 
     @Override
     public void loadAllUsers(String passedSearchTerm) {
@@ -154,12 +147,39 @@ public class SearchViewController implements Initializable, UserInitializable {
 
     }
 
+    @Override
+    public void loadUserDetailsFromListView(String passedSearchTerm, User passedUser) {
+
+    }
+
+
+    @FXML
+    void searchButtonClicked(ActionEvent event) throws IOException, InterruptedException {
+
+        radioButtonsHBox.setVisible(true);
+        simpleListViewRadioButton.setSelected(true);
+
+        hBoxComment.setVisible(true);
+
+
+        searchTerm = searchTextField.getText();
+
+        //        APIResponse apiResponse = APIUtility.getDataFromFile();
+        apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
+        listView.getItems().clear();
+
+        listView.getItems().addAll(apiResponse.getUsers());
+
+        listView.setVisible(true);
+
+
+    }
 
     @FXML
     void radioCheck(ActionEvent event) throws IOException, InterruptedException {
         searchTerm = searchTextField.getText();
 
-//        APIResponse apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
+        //        APIResponse apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
 
         if (toggleGroup.getSelectedToggle().equals(simpleListViewRadioButton)) {
 
@@ -176,8 +196,8 @@ public class SearchViewController implements Initializable, UserInitializable {
             // clearing all the duplicate children again
             userCardLayoutVBox.getChildren().clear();
             for (User user : apiResponse.getUsers()) {
-                       /*if (apiResponse.getTotalResults() >= row)
-                       {*/
+                                   /*if (apiResponse.getTotalResults() >= row)
+                                   {*/
 
                 /*checkedUser = new User(user.getPosition(), user.getUserID(), user.getUserName(), user.getFullName(), user.getIsPrivate(), user.getIsVerified(), user.getHasAnonymousProfilePicture(), user.getHasHighlightReels(), user.getProfilePicture());*/
 
@@ -191,9 +211,9 @@ public class SearchViewController implements Initializable, UserInitializable {
 
                 UserCardController userCardController = fxmlLoader.getController();
                 userCardController.setData(user);
-                           /*userContainer.add(userBox, 1, row + 1);
-                           GridPane.setMargin(userBox, new Insets(10));
-                           row++; */
+                                       /*userContainer.add(userBox, 1, row + 1);
+                                       GridPane.setMargin(userBox, new Insets(10));
+                                       row++; */
 
             }
 
@@ -211,30 +231,7 @@ public class SearchViewController implements Initializable, UserInitializable {
     }
 
 
-    @FXML
-    void searchButtonClicked(ActionEvent event) throws IOException, InterruptedException {
 
-        radioButtonsHBox.setVisible(true);
-        simpleListViewRadioButton.setSelected(true);
-
-        hBoxComment.setVisible(true);
-
-
-//        userCardLayoutVBox.setVisible(true);
-//        scrollPane.setVisible(true);
-
-        searchTerm = searchTextField.getText();
-
-//        APIResponse apiResponse = APIUtility.getDataFromFile();
-        apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
-        listView.getItems().clear();
-
-        listView.getItems().addAll(apiResponse.getUsers());
-
-        listView.setVisible(true);
-
-
-    }
 
     public void clickedAnyUserCardBoxInUserCardLayout() {
 
@@ -248,7 +245,8 @@ public class SearchViewController implements Initializable, UserInitializable {
                         User.addClickedUserFromUserCardBox(mappingUserWithHBox.getAllUsersAndHBoxesInfo().get(userCardBox));
                         System.out.println(User.getClickedUserFromBothListViews().size());
 
-                        SceneChanger.changeScenes(event, "Views/user-profile-details-view.fxml", "Profile Page", User.getClickedUserFromBothListViews().get(0));
+                        SceneChanger.changeScenes(event, "Views/user-profile-details-view.fxml", User.getClickedUserFromBothListViews().get(0).getFullName()+"'s Profile", User.getClickedUserFromBothListViews().get(0));
+
                         User.getClickedUserFromBothListViews().remove(0);
 
                     } catch (IOException e) {

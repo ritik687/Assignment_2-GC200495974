@@ -86,12 +86,12 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
     public void loadUserProfileDetails(UserProfileDetails userProfileDetail) {
 
         duplicateUserProfileDetail = userProfileDetail;
-         fullNameLabel.setText(userProfileDetail.getFullName());
+        fullNameLabel.setText(userProfileDetail.getFullName());
     }
 
     @FXML
     void backButtonPressed(ActionEvent event) throws IOException {
-        SceneChanger.changeScenes(event, "Views/user-profile-details-view.fxml","Profile",duplicateUserProfileDetail);
+        SceneChanger.changeScenes(event, "Views/user-profile-details-view.fxml",duplicateUserProfileDetail.getFullName()+"'s Profile",duplicateUserProfileDetail);
     }
 
     @FXML

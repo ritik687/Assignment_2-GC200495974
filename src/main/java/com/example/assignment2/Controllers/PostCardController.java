@@ -34,17 +34,17 @@ public class PostCardController implements Initializable {
 
     public void setData(Post post){
 
-            commentsLabel.setText(APIUtility.formatNumber(post.getTotalComments()));
-            likesLabel.setText(APIUtility.formatNumber(post.getTotalLikes()));
+        commentsLabel.setText(APIUtility.formatNumber(post.getTotalComments()));
+        likesLabel.setText(APIUtility.formatNumber(post.getTotalLikes()));
 
-            String response = APIUtility.sendGETRequest(post.getPicture());
-            if(!post.getIsVideo())
-            {
-                if (response != "Error")
-                    imageView.setImage(new Image(post.getPicture()));
-                else
-                    imageView.setImage(new Image(Main.class.getResourceAsStream("images/noProfileImage.png")));
-            }
+        String response = APIUtility.sendGETRequest(post.getPicture());
+        if(!post.getIsVideo())
+        {
+            if (response != "Error")
+                imageView.setImage(new Image(post.getPicture()));
+            else
+                imageView.setImage(new Image(Main.class.getResourceAsStream("images/noProfileImage.png")));
+        }
 
 
 

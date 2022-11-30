@@ -33,7 +33,7 @@ public class HomeViewController implements Initializable {
     @FXML
     void homeButtonClicked(MouseEvent event) {
 
-            borderPane.setCenter(childAnchorPane);
+        borderPane.setCenter(childAnchorPane);
     }
 
     @FXML
