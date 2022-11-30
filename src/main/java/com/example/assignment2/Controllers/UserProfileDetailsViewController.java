@@ -17,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -66,6 +67,10 @@ public class UserProfileDetailsViewController implements Initializable, UserProf
     @FXML
     private Button viewPostsButton;
 
+
+
+
+
     private Media media;
 
     private UserProfileDetails userProfileDetails;
@@ -99,8 +104,8 @@ public class UserProfileDetailsViewController implements Initializable, UserProf
             e.printStackTrace();
         }
 
-        // calling one method to set the different fields and display the information
-        displayData(userProfileDetails,passedUser);
+          // calling one method to set the different fields and display the information
+          displayData(userProfileDetails,passedUser);
 
     }
 

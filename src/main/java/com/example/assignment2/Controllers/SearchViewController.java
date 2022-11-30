@@ -73,8 +73,9 @@ public class SearchViewController implements Initializable, UserInitializable {
 
         centeredGraphicVBox.setVisible(false);
         listView.setVisible(false);
-
         hBoxComment.setVisible(false);
+
+        searchImageButton.setDisable(true);
 
         homeImageButton.setCursor(Cursor.HAND);
         searchImageButton.setCursor(Cursor.HAND);
@@ -90,6 +91,14 @@ public class SearchViewController implements Initializable, UserInitializable {
         simpleListViewRadioButton.setToggleGroup(toggleGroup);
         graphicListViewRadioButton.setToggleGroup(toggleGroup);
         radioButtonsHBox.setVisible(false);
+
+        searchTextField.textProperty().addListener((observableValue, s, searchText) -> {
+                    if(searchText.length()!=0){
+                        searchImageButton.setDisable(false);
+                    }
+                    else
+                        searchImageButton.setDisable(true);
+        });
 
 
         listView.getSelectionModel().selectedItemProperty().addListener((observableValue, user, selectedUser) -> {
@@ -110,6 +119,7 @@ public class SearchViewController implements Initializable, UserInitializable {
                 }
             });
         });
+
     }
 
 
@@ -153,117 +163,117 @@ public class SearchViewController implements Initializable, UserInitializable {
     }
 
 
-    @FXML
-    void searchButtonClicked(ActionEvent event) throws IOException, InterruptedException {
+                @FXML
+                void searchButtonClicked(ActionEvent event) throws IOException, InterruptedException {
 
-        radioButtonsHBox.setVisible(true);
-        simpleListViewRadioButton.setSelected(true);
+                    radioButtonsHBox.setVisible(true);
+                    simpleListViewRadioButton.setSelected(true);
 
-        hBoxComment.setVisible(true);
-
-
-        searchTerm = searchTextField.getText();
-
-        //        APIResponse apiResponse = APIUtility.getDataFromFile();
-        apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
-        listView.getItems().clear();
-
-        listView.getItems().addAll(apiResponse.getUsers());
-
-        listView.setVisible(true);
+                    hBoxComment.setVisible(true);
 
 
-    }
+                    searchTerm = searchTextField.getText();
 
-    @FXML
-    void radioCheck(ActionEvent event) throws IOException, InterruptedException {
-        searchTerm = searchTextField.getText();
+            //        APIResponse apiResponse = APIUtility.getDataFromFile();
+                    apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
+                    listView.getItems().clear();
 
-        //        APIResponse apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
+                    listView.getItems().addAll(apiResponse.getUsers());
 
-        if (toggleGroup.getSelectedToggle().equals(simpleListViewRadioButton)) {
+                    listView.setVisible(true);
 
-            listView.getItems().clear();
-            listView.getItems().addAll(apiResponse.getUsers());
 
-            //setting visibility
-            listView.setVisible(true);
-            centeredGraphicVBox.setVisible(false);
-        }
+                }
 
-        if (this.toggleGroup.getSelectedToggle().equals(this.graphicListViewRadioButton)) {
+                @FXML
+                void radioCheck(ActionEvent event) throws IOException, InterruptedException {
+                    searchTerm = searchTextField.getText();
 
-            // clearing all the duplicate children again
-            userCardLayoutVBox.getChildren().clear();
-            for (User user : apiResponse.getUsers()) {
+            //        APIResponse apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
+
+                    if (toggleGroup.getSelectedToggle().equals(simpleListViewRadioButton)) {
+
+                        listView.getItems().clear();
+                        listView.getItems().addAll(apiResponse.getUsers());
+
+                        //setting visibility
+                        listView.setVisible(true);
+                        centeredGraphicVBox.setVisible(false);
+                    }
+
+                    if (this.toggleGroup.getSelectedToggle().equals(this.graphicListViewRadioButton)) {
+
+                        // clearing all the duplicate children again
+                        userCardLayoutVBox.getChildren().clear();
+                        for (User user : apiResponse.getUsers()) {
                                    /*if (apiResponse.getTotalResults() >= row)
                                    {*/
 
-                /*checkedUser = new User(user.getPosition(), user.getUserID(), user.getUserName(), user.getFullName(), user.getIsPrivate(), user.getIsVerified(), user.getHasAnonymousProfilePicture(), user.getHasHighlightReels(), user.getProfilePicture());*/
+                            /*checkedUser = new User(user.getPosition(), user.getUserID(), user.getUserName(), user.getFullName(), user.getIsPrivate(), user.getIsVerified(), user.getHasAnonymousProfilePicture(), user.getHasHighlightReels(), user.getProfilePicture());*/
 
 
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                //            fxmlLoader.setLocation(getClass().getResource("user-card-view.fxml"));
-                fxmlLoader.setLocation(Main.class.getResource("Views/user-card-view.fxml"));
-                HBox userCardBox = fxmlLoader.load();
+                            FXMLLoader fxmlLoader = new FXMLLoader();
+                            //            fxmlLoader.setLocation(getClass().getResource("user-card-view.fxml"));
+                            fxmlLoader.setLocation(Main.class.getResource("Views/user-card-view.fxml"));
+                            HBox userCardBox = fxmlLoader.load();
 
-                mappingUserWithHBox.addUserAndHBoxInfo(userCardBox, user);
+                            mappingUserWithHBox.addUserAndHBoxInfo(userCardBox, user);
 
-                UserCardController userCardController = fxmlLoader.getController();
-                userCardController.setData(user);
+                            UserCardController userCardController = fxmlLoader.getController();
+                            userCardController.setData(user);
                                        /*userContainer.add(userBox, 1, row + 1);
                                        GridPane.setMargin(userBox, new Insets(10));
                                        row++; */
 
-            }
+                        }
 
 
-            userCardLayoutVBox.getChildren().addAll(mappingUserWithHBox.getAllUsersAndHBoxesInfo().keySet());
+                        userCardLayoutVBox.getChildren().addAll(mappingUserWithHBox.getAllUsersAndHBoxesInfo().keySet());
 
-            clickedAnyUserCardBoxInUserCardLayout();
-
-
-            //setting visibility
-            centeredGraphicVBox.setVisible(true);
-            listView.setVisible(false);
-        }
-
-    }
+                        clickedAnyUserCardBoxInUserCardLayout();
 
 
-
-
-    public void clickedAnyUserCardBoxInUserCardLayout() {
-
-
-        for (HBox userCardBox : mappingUserWithHBox.getAllUsersAndHBoxesInfo().keySet()) {
-            userCardBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-
-                        User.addClickedUserFromUserCardBox(mappingUserWithHBox.getAllUsersAndHBoxesInfo().get(userCardBox));
-                        System.out.println(User.getClickedUserFromBothListViews().size());
-
-                        SceneChanger.changeScenes(event, "Views/user-profile-details-view.fxml", User.getClickedUserFromBothListViews().get(0).getFullName()+"'s Profile", User.getClickedUserFromBothListViews().get(0));
-
-                        User.getClickedUserFromBothListViews().remove(0);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        //setting visibility
+                        centeredGraphicVBox.setVisible(true);
+                        listView.setVisible(false);
                     }
+
                 }
 
-            });
-        }
-
-    }
 
 
-    @FXML
-    void homeButtonClicked(MouseEvent event) throws IOException {
-        SceneChanger.changeScenes(event, "Views/home-view.fxml", "Home Page");
-    }
+
+                public void clickedAnyUserCardBoxInUserCardLayout() {
+
+
+                    for (HBox userCardBox : mappingUserWithHBox.getAllUsersAndHBoxesInfo().keySet()) {
+                        userCardBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                try {
+
+                                    User.addClickedUserFromUserCardBox(mappingUserWithHBox.getAllUsersAndHBoxesInfo().get(userCardBox));
+                                    System.out.println(User.getClickedUserFromBothListViews().size());
+
+                                    SceneChanger.changeScenes(event, "Views/user-profile-details-view.fxml", User.getClickedUserFromBothListViews().get(0).getFullName()+"'s Profile", User.getClickedUserFromBothListViews().get(0));
+
+                                    User.getClickedUserFromBothListViews().remove(0);
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        });
+                    }
+
+                }
+
+
+                @FXML
+                void homeButtonClicked(MouseEvent event) throws IOException {
+                    SceneChanger.changeScenes(event, "Views/home-view.fxml", "Home Page");
+                }
 
 
 }

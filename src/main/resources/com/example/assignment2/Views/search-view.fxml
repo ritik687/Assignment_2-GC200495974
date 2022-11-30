@@ -41,7 +41,7 @@
                         <HBox prefHeight="44.0" prefWidth="373.0" styleClass="round-layout">
                            <children>
                               <TextField fx:id="searchTextField" prefHeight="50.0" prefWidth="347.0" promptText="Search" styleClass="transparent" />
-                              <HBox prefHeight="42.0" prefWidth="26.0">
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="26.0">
                                  <children>
                                     <Button fx:id="searchImageButton" alignment="CENTER" mnemonicParsing="false" onAction="#searchButtonClicked" prefHeight="65.0" prefWidth="57.0" styleClass="transparent">
                                        <graphic>
