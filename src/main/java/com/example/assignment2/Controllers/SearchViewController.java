@@ -151,7 +151,8 @@ public class SearchViewController implements Initializable, UserInitializable {
 
             APIResponse apiResponse = null;
             try {
-                apiResponse = APIUtility.getUsersFromSearchTerm(passedSearchTerm);
+                 APIUtility.getUsersFromSearchTerm(passedSearchTerm);
+                 apiResponse =APIUtility.getUsersFromFile();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -188,7 +189,9 @@ public class SearchViewController implements Initializable, UserInitializable {
                     searchTerm = searchTextField.getText();
 
             //        APIResponse apiResponse = APIUtility.getDataFromFile();
-                    apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
+//                    apiResponse = APIUtility.getUsersFromSearchTerm(searchTerm);
+                    APIUtility.getUsersFromSearchTerm(searchTerm);
+                    apiResponse = APIUtility.getUsersFromFile();
 
                     if(apiResponse.getIsError())
                     {

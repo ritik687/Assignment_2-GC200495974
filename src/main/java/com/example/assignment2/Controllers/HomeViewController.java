@@ -52,6 +52,7 @@ public class HomeViewController implements Initializable {
         homeButton.setCursor(Cursor.HAND);
         searchButton.setCursor(Cursor.HAND);
         instagramPanelHBox.setCursor(Cursor.HAND);
+        loadView("Views/search-view.fxml");
     }
 
     private void loadView(String resourceName){

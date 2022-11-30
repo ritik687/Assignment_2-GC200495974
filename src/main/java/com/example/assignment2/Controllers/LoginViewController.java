@@ -184,7 +184,7 @@ public class LoginViewController implements Initializable {
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("Message");
                                     alert.setHeaderText("CREDENTIALS");
-                                    alert.setContentText("\tUser Name : ritik\n\tPassword: ritik");
+                                    alert.setContentText("\tUser Name : ritik_mall_\n\tPassword: ritik");
                                     alert.show();
 
                                 }});
@@ -222,11 +222,27 @@ public class LoginViewController implements Initializable {
 
                 // again adding the same listener to the password field
                 passwordField.textProperty().addListener((observableValue, s, newText) -> {
-                    if(newText.length()>0) {
+                    if(newText.length()>0)
+                    {
                         loginButton.setDisable(false);
                         showLabel.setVisible(true);
                     }
-                    else{
+                    else
+                    {
+                        loginButton.setDisable(true);
+                        showLabel.setVisible(false);
+                    }
+                });
+
+                userNameField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+                    if(newValue.length()>0)
+                    {
+                        loginButton.setDisable(false);
+                        showLabel.setVisible(true);
+                    }
+
+                    else
+                    {
                         loginButton.setDisable(true);
                         showLabel.setVisible(false);
                     }
@@ -234,3 +250,4 @@ public class LoginViewController implements Initializable {
 
             }
     }
+

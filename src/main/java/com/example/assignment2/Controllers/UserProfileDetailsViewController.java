@@ -96,7 +96,8 @@ public class UserProfileDetailsViewController implements Initializable, UserProf
 
 //        UserProfileDetails userProfileDetails = null;
         try {
-            userProfileDetails = APIUtility.getUserProfileDetailsFromUserName(passedUser.getUserName());
+             APIUtility.getUserProfileDetailsFromUserName(passedUser.getUserName());
+             userProfileDetails =APIUtility.getUserProfileDetailsFromFile();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -116,7 +117,8 @@ public class UserProfileDetailsViewController implements Initializable, UserProf
         {
 
             try {
-                userProfileDetails = APIUtility.getUserProfileDetailsFromUserName(passedUser.getUserName());
+                APIUtility.getUserProfileDetailsFromUserName(passedUser.getUserName());
+                userProfileDetails =APIUtility.getUserProfileDetailsFromFile();
 //                System.out.println(userProfileDetails);
             } catch (IOException e) {
                 e.printStackTrace();

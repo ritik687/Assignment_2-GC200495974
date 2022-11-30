@@ -13,6 +13,7 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
@@ -21,7 +22,7 @@ public class APIUtility {
 
 
 
-        public static APIResponse getUsersFromSearchTerm(String searchTerm) throws IOException, InterruptedException {
+        public static void getUsersFromSearchTerm(String searchTerm) throws IOException, InterruptedException {
 
             searchTerm =searchTerm.replaceAll(" ","%20");
 
@@ -34,55 +35,18 @@ public class APIUtility {
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
 
-//             Commenting this so as to avoid the overwriting the same file.,.
-/*            HttpResponse<Path> response = client.send(httpRequest,HttpResponse
-                    .BodyHandlers
-                    .ofFile(Paths.get("users.json")));*/
+            // this two lines of code is for when file is overwrited then sometimes json file gets error so thats why here i am first deleting the file.
+            Path path=Path.of("users.json");
+            Files.delete(path);
 
-
-            HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-//            System.out.println(httpResponse.body());
-
-            Gson gson=new Gson();
-            APIResponse apiResponse=gson.fromJson(httpResponse.body(),APIResponse.class);
-
-            return apiResponse;
-
+            //this takes whatever is returned and saves it to a file called "users.json"
+            HttpResponse<Path> response = client.send(httpRequest,HttpResponse
+                                                .BodyHandlers
+                                                .ofFile(Paths.get("users.json")));
         }
 
-   /* public static APIResponse getUserProfileDetailsFromUserName(String userName) throws IOException, InterruptedException {
 
-//        searchTerm =searchTerm.replaceAll(" ","%20");
-
-        String uri= "https://instagram-profile1.p.rapidapi.com/getProfile/"+userName;
-        HttpClient client=HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder()
-                .uri(URI.create("https://instagram-profile1.p.rapidapi.com/getprofile/therock"))
-                .header("X-RapidAPI-Key", "83b0d80e46msh31b77b24d70e08dp1f8d06jsn39771ea54da7")
-                .header("X-RapidAPI-Host", "instagram-profile1.p.rapidapi.com")
-                .method("GET", HttpRequest.BodyPublishers.noBody())
-                .build();
-
-         *//*    Commenting this so as to avoid the overwriting the same file.,.*//*
-            HttpResponse<Path> response = client.send(httpRequest,HttpResponse
-                    .BodyHandlers
-                    .ofFile(Paths.get("userProfileDetails.json")));
-
-
-        HttpResponse<String> httpResponse = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
-        System.out.println(httpResponse.body());
-
-        Gson gson=new Gson();
-        APIResponse apiResponse=gson.fromJson(httpResponse.body(),APIResponse.class);
-
-        return apiResponse;
-
-    }*/
-
-
-    public static UserProfileDetails getUserProfileDetailsFromUserName(String userName) throws IOException, InterruptedException {
-
-//        searchTerm =searchTerm.replaceAll(" ","%20");
+    public static void getUserProfileDetailsFromUserName(String userName) throws IOException, InterruptedException {
 
         String uri= "https://instagram-profile1.p.rapidapi.com/getprofile/"+userName;
         HttpClient client=HttpClient.newHttpClient();
@@ -93,23 +57,19 @@ public class APIUtility {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
 
-         /*    Commenting this so as to avoid the overwriting the same file.,.*/
-//        HttpResponse<Path> response = client.send(httpRequest,HttpResponse
-//                .BodyHandlers
-//                .ofFile(Paths.get("userProfileDetails.json")));
 
+        Path path=Path.of("userProfileDetails.json");
+        Files.delete(path);
 
-        HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-//        System.out.println(httpResponse.body());
-
-        Gson gson=new Gson();
-        UserProfileDetails userProfileDetails =gson.fromJson(httpResponse.body(), UserProfileDetails.class);
-
-        return userProfileDetails;
+        //this takes whatever is returned and saves it to a file called "userProfileDetails.json"
+        HttpResponse<Path> response = client.send(httpRequest,HttpResponse
+                .BodyHandlers
+                .ofFile(Paths.get("userProfileDetails.json")));
 
     }
 
-    public static APIResponse getDataFromFile() throws IOException, InterruptedException {
+
+    public static APIResponse getUsersFromFile() throws IOException, InterruptedException {
 
             Gson gson =new Gson();
             APIResponse apiResponse =null;
@@ -131,7 +91,6 @@ public class APIUtility {
 
         }
 
-    // this is the testing method for the detil view
     public static UserProfileDetails getUserProfileDetailsFromFile() throws IOException, InterruptedException {
 
         Gson gson =new Gson();
@@ -142,7 +101,7 @@ public class APIUtility {
                 FileReader fileReader = new FileReader("userProfileDetails.json");
                 JsonReader jsonReader = new JsonReader(fileReader);
         ) {
-            // here we are converting the json into the apiresponse object.
+            // here we are converting the json into the userProfileDetails object.
             userProfileDetails = gson.fromJson(jsonReader, UserProfileDetails.class);
 
 
@@ -156,59 +115,8 @@ public class APIUtility {
     }
 
 
-    // this is the testing method for the media
-    public static Media getMediaDetailsFromFile() throws IOException, InterruptedException {
-
-        Gson gson =new Gson();
-        Media medias =null;
-
-        try (
-                // filereader knows how to access my file system that knows how to give me back the file While Jsonreader know how to parse that file for json data
-                FileReader fileReader = new FileReader("userProfileDetails.json");
-                JsonReader jsonReader = new JsonReader(fileReader);
-        ) {
-            // here we are converting the json into the apiresponse object.
-            medias = gson.fromJson(jsonReader, Media.class);
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return medias;
-
-
-    }
-
-    // this is the testing method for the media
-    public static Post getPostDetailsFromFile() throws IOException, InterruptedException {
-
-        Gson gson =new Gson();
-        Post posts =null;
-
-        try (
-                // filereader knows how to access my file system that knows how to give me back the file While Jsonreader know how to parse that file for json data
-                FileReader fileReader = new FileReader("userProfileDetails.json");
-                JsonReader jsonReader = new JsonReader(fileReader);
-        ) {
-            // here we are converting the json into the apiresponse object.
-            posts = gson.fromJson(jsonReader, Post.class);
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return posts;
-
-
-    }
-
-
-
-
-
     // this method for the image that showing null for the image pattern that is used to fill the circle object
+    // this will check for the image nullable value.
     public  static String sendGETRequest(String requestURL) {
         URL url;
         String response = "null";
@@ -238,17 +146,17 @@ public class APIUtility {
 
 
 
-    private static String[] suffix = new String[]{"","K", "M", "B", "T"};
-    private static int MAX_LENGTH = 4;
+    private static String[] suffixCharacter = new String[]{"","K", "M", "B", "T"};
+    private static int maxLength = 4;
 
     // this method is used to format the long number to short form
     public static String formatNumber(double number) {
-        String r = new DecimalFormat("##0E0").format(number);
-        r = r.replaceAll("E[0-9]", suffix[Character.getNumericValue(r.charAt(r.length() - 1)) / 3]);
-        while(r.length() > MAX_LENGTH || r.matches("[0-9]+\\.[a-z]")){
-            r = r.substring(0, r.length()-2) + r.substring(r.length() - 1);
+        String value = new DecimalFormat("##0E0").format(number);
+        value = value.replaceAll("E[0-9]", suffixCharacter[Character.getNumericValue(value.charAt(value.length() - 1)) / 3]);
+        while(value.length() > maxLength || value.matches("[0-9]+\\.[a-z]")){
+            value = value.substring(0, value.length()-2) + value.substring(value.length() - 1);
         }
-        return r;
+        return value;
     }
 
 }
