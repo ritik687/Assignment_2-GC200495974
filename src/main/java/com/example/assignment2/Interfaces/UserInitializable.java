@@ -8,8 +8,6 @@ public interface UserInitializable {
 
     void loadUserDetailsFromListView(String passedSearchTerm, User passedUser);
 
-    void loadAllUsers(String passedSearchTerm);
-
     void loadUserDetailsFromGraphicView(User passedUser);
 
 

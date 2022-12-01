@@ -1,4 +1,5 @@
-module com.example.assignment2 {
+module com.example.assignment2
+{
     requires javafx.controls;
     requires javafx.fxml;
 

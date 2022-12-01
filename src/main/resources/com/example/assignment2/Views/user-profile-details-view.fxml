@@ -17,7 +17,7 @@
    <children>
       <BorderPane layoutX="389.0" layoutY="188.0" prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <HBox prefHeight="63.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="10.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="901.0">
                      <children>
@@ -58,15 +58,48 @@
                         <Insets />
                      </HBox.margin>
                   </HBox>
+                  <ImageView fx:id="privacyImageView" fitHeight="35.0" fitWidth="57.0" onMouseClicked="#privacyImageViewClicked" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="20.0" top="10.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../images/unlock.png" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
          </top>
-         <left>
-            <VBox prefHeight="382.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="94.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="110.0" prefWidth="221.0" styleClass="view-home-hBox">
+                     <children>
+                        <Button fx:id="viewImagesButton" mnemonicParsing="false" onMouseClicked="#viewPostsButtonClicked" prefHeight="78.0" prefWidth="230.0" styleClass="transparent" text="View Images">
+                           <graphic>
+                              <ImageView fitHeight="58.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/post.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Times New Roman" size="24.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+         </bottom>
+         <center>
+            <VBox fx:id="centeredVBox" prefHeight="382.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="900.0" spacing="20.0">
                      <children>
-                        <Circle fx:id="circle" fill="#e2ff1f" radius="102.0" stroke="#ffffff00" strokeType="INSIDE">
+                        <Circle fx:id="circle" fill="#e2ff1f" radius="102.0" stroke="#ffffff00" strokeType="INSIDE" styleClass="shadow">
                            <HBox.margin>
                               <Insets left="50.0" />
                            </HBox.margin>
@@ -90,7 +123,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="204.0" prefWidth="281.0">
                            <children>
-                              <Label fx:id="followersLabel" alignment="BOTTOM_CENTER" prefHeight="83.0" prefWidth="191.0" text="Label" textAlignment="CENTER">
+                              <Label fx:id="followersLabel" alignment="BOTTOM_CENTER" prefHeight="44.0" prefWidth="202.0" text="Label" textAlignment="CENTER">
                                  <font>
                                     <Font name="Times New Roman Bold" size="35.0" />
                                  </font>
@@ -151,29 +184,12 @@
                   </VBox>
                </children>
             </VBox>
-         </left>
-         <bottom>
-            <HBox alignment="CENTER" prefHeight="110.0" prefWidth="900.0" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="110.0" prefWidth="221.0" styleClass="view-home-hBox">
-                     <children>
-                        <Button fx:id="viewPostsButton" mnemonicParsing="false" onMouseClicked="#viewPostsButtonClicked" prefHeight="78.0" prefWidth="230.0" styleClass="transparent" text="View Images">
-                           <graphic>
-                              <ImageView fitHeight="58.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/post.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font name="Times New Roman" size="24.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-         </bottom>
+         </center>
       </BorderPane>
+      <Label fx:id="msgLabel" alignment="CENTER" layoutX="86.0" layoutY="118.0" prefHeight="474.0" prefWidth="741.0" text="Sorry for this experience">
+         <font>
+            <Font name="Times New Roman" size="44.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

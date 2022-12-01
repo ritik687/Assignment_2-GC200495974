@@ -58,7 +58,10 @@
 }
 
 .shadow{
-    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0), 10,0,0,10);
+    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.1), 10,0,0,10);
+}
+.rect-round{
+    -fx-background-radius: 10;
 }
 
 .user-card-background-radius{
@@ -136,4 +139,98 @@
 .categoryLabel{
     -fx-text-fill: #7c7878;
 }
+
+
+
+/*for the list view*/
+.list-cell
+{
+    -fx-text-fill: black;
+}
+
+.list-cell:filled:hover
+{
+    -fx-background-color: #caf39a;
+    -fx-text-fill: #696767;
+}
+
+
+
+/*for the table view*/
+.tableView{
+
+    -fx-font-family: "Microsoft Sans Serif";
+    -fx-font-size: 13px;
+    -fx-background-color: #ecf1e4;
+    -fx-border-color: transparent;
+    -fx-font-weight: bold;
+
+}
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+
+}
+
+
+
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+.table-row-cell :hover {
+    -fx-background-color: #a4e029;
+    -fx-text-background-color: red;
+}
+.table-row-cell :odd{
+    -fx-background-color: #93f9b911;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell :even{
+    -fx-background-color: #1dbbdd11;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+
+
+/*for the radio buttons*/
+
+* {
+    -fx-darkest-grey-color: #323232;
+}
+
+.radio-button .radio {
+    -fx-border-width: 1px;
+    -fx-border-color: -fx-darkest-grey-color;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 15px;
+    -fx-padding: 3px;
+}
+.radio-button .radio:selected {
+    -fx-background-color: white;
+}
+.radio-button -radio:armed {
+    -fx-background-color: white;
+
+}
+.radio-button -radio:determinate {
+    -fx-background-color: white;
+
+}
+.radio-button -radio:indeterminate {
+    -fx-background-color: white;
+}
+.radio-button .dot {
+    -fx-background-radius: 15px;
+    -fx-padding: 8px;
+}
+
+
 

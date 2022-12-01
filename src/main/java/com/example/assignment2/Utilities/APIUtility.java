@@ -5,11 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.swing.*;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
+import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -21,31 +20,48 @@ import java.text.DecimalFormat;
 public class APIUtility {
 
 
-
+    /**
+     * This method will make the json file. A functioning API call is used to receive JSON data and write in the users.json file
+     * @param searchTerm
+     * @throws IOException
+     * @throws InterruptedException
+     */
         public static void getUsersFromSearchTerm(String searchTerm) throws IOException, InterruptedException {
 
             searchTerm =searchTerm.replaceAll(" ","%20");
+            try {
+                String uri = "https://instagram-profile1.p.rapidapi.com/searchuser/" + searchTerm;
+                HttpClient client = HttpClient.newHttpClient();
+                HttpRequest httpRequest = HttpRequest.newBuilder()
+                        .uri(URI.create(uri))
+                        .header("X-RapidAPI-Key", "83b0d80e46msh31b77b24d70e08dp1f8d06jsn39771ea54da7")
+                        .header("X-RapidAPI-Host", "instagram-profile1.p.rapidapi.com")
+                        .method("GET", HttpRequest.BodyPublishers.noBody())
+                        .build();
 
-            String uri= "https://instagram-profile1.p.rapidapi.com/searchuser/"+searchTerm;
-            HttpClient client=HttpClient.newHttpClient();
-            HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(URI.create(uri))
-                    .header("X-RapidAPI-Key", "83b0d80e46msh31b77b24d70e08dp1f8d06jsn39771ea54da7")
-                    .header("X-RapidAPI-Host", "instagram-profile1.p.rapidapi.com")
-                    .method("GET", HttpRequest.BodyPublishers.noBody())
-                    .build();
 
-            // this two lines of code is for when file is overwrited then sometimes json file gets error so thats why here i am first deleting the file.
-            Path path=Path.of("users.json");
-            Files.delete(path);
+                // this two lines of code is for when file is overwrited then sometimes json file gets error so thats why here i am first deleting the file.
+                Path path = Path.of("users.json");
+                Files.delete(path);
 
-            //this takes whatever is returned and saves it to a file called "users.json"
-            HttpResponse<Path> response = client.send(httpRequest,HttpResponse
-                                                .BodyHandlers
-                                                .ofFile(Paths.get("users.json")));
+                //this takes whatever is returned and saves it to a file called "users.json"
+                HttpResponse<Path> response = client.send(httpRequest, HttpResponse
+                        .BodyHandlers
+                        .ofFile(Paths.get("users.json")));
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+                JFrame frame = new JFrame();
+                JOptionPane.showMessageDialog(frame, "\t\t\""+searchTerm+"\" is not allowed in the search bar.\n\t\tIllegal character in path at index 53: https://instagram-profile1.p.rapidapi.com/searchuser/`");
+            }
         }
 
-
+    /**
+     * This method will make the json file. A functioning API call is used to receive JSON data and write in the usersProfileDetails.json file
+     * @param userName
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public static void getUserProfileDetailsFromUserName(String userName) throws IOException, InterruptedException {
 
         String uri= "https://instagram-profile1.p.rapidapi.com/getprofile/"+userName;
@@ -69,6 +85,12 @@ public class APIUtility {
     }
 
 
+    /**
+     * This method will return the APIResponse object while parsing the users.json file
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public static APIResponse getUsersFromFile() throws IOException, InterruptedException {
 
             Gson gson =new Gson();
@@ -91,6 +113,12 @@ public class APIUtility {
 
         }
 
+    /**
+     * This method will return the UserProfileDetails object while parsing the userProfileDetails.json file
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public static UserProfileDetails getUserProfileDetailsFromFile() throws IOException, InterruptedException {
 
         Gson gson =new Gson();
@@ -111,27 +139,6 @@ public class APIUtility {
         }
         return userProfileDetails;
 
-
-    }
-
-
-    public static String getMineProfilePictureURL() throws IOException, InterruptedException {
-
-        String uri= "https://instagram-profile1.p.rapidapi.com/getprofile/ritik_mall_";
-        HttpClient client=HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder()
-                .uri(URI.create(uri))
-                .header("X-RapidAPI-Key", "83b0d80e46msh31b77b24d70e08dp1f8d06jsn39771ea54da7")
-                .header("X-RapidAPI-Host", "instagram-profile1.p.rapidapi.com")
-                .method("GET", HttpRequest.BodyPublishers.noBody())
-                .build();
-
-        HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-        Gson gson = new Gson();
-        UserProfileDetails userProfileDetails = gson.fromJson(httpResponse.body(), UserProfileDetails.class);
-
-        return userProfileDetails.getProfilePicture();
 
     }
 
@@ -159,22 +166,38 @@ public class APIUtility {
                 response="Error"; // Here error is error while connecting or Content not found;
             }
         } catch (IOException e) {
-
+            System.out.println(e.getMessage());
         }
 //        System.out.println(response);
         return response;
     }
 
 
+    // validating URL of the profile picture using JDK
+    public static boolean isValidURL(String url) throws MalformedURLException, URISyntaxException {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (MalformedURLException e) {
+            return false;
+        } catch (URISyntaxException e) {
+            return false;
+        }
 
-    private static String[] suffixCharacter = new String[]{"","K", "M", "B", "T"};
-    private static int maxLength = 4;
+    }
 
-    // this method is used to format the long number to short form
-    public static String formatNumber(double number) {
+
+
+    private static String[] suffix = new String[]{"","K", "M", "B", "T"};
+    private static int maxLength = 5;
+
+    // this method is used to format the long number to short form like 1.5M, 25.8K
+    public static String formatNumber(Long number) {
         String value = new DecimalFormat("##0E0").format(number);
-        value = value.replaceAll("E[0-9]", suffixCharacter[Character.getNumericValue(value.charAt(value.length() - 1)) / 3]);
-        while(value.length() > maxLength || value.matches("[0-9]+\\.[a-z]")){
+        value = value.replaceAll("E[0-9]", suffix[Character.getNumericValue(value.charAt(value.length() - 1)) / 3]);
+
+        while(value.length() > maxLength || value.matches("[0-9]+\\.[0-9][a-z]"))
+        {
             value = value.substring(0, value.length()-2) + value.substring(value.length() - 1);
         }
         return value;

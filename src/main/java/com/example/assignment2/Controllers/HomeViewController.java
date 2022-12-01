@@ -27,8 +27,7 @@ import java.util.ResourceBundle;
 
 public class HomeViewController extends Component implements Initializable {
 
-    @FXML
-    private AnchorPane childAnchorPane;
+
 
     @FXML
     private HBox instagramPanelHBox;
@@ -49,16 +48,23 @@ public class HomeViewController extends Component implements Initializable {
     private HBox logoutButtonHBox;
 
 
-
+    /**
+     * This method will reload mine profile details on the starting and set the view at the center of the borderPane
+     * @param event
+     */
     @FXML
     void profileButtonClicked(MouseEvent event) {
-
-//            borderPane.setCenter(childAnchorPane);
         loadView("Views/mine-profile-details-view.fxml");
         profileButtonHBox.setStyle("-fx-background-color: #caf39a;");
         searchButtonHBox.setStyle("-fx-background-color: transparent;");
+
+
     }
 
+    /**
+     * This method will load the search view at the center of the border pane
+     * @param event
+     */
     @FXML
     void searchButtonClicked(MouseEvent event) {
 
@@ -76,30 +82,17 @@ public class HomeViewController extends Component implements Initializable {
 
         profileButtonHBox.setStyle("-fx-background-color: #caf39a;");
 
-
-        String profilePictureURL = null;
-        try {
-            profilePictureURL = APIUtility.getMineProfilePictureURL();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        String response = APIUtility.sendGETRequest(profilePictureURL);
-
-            if (response != "Error")
-            {
-                Image image = new Image(profilePictureURL);
-                imageCircle.setFill(new ImagePattern(image));
-            } else {
-                imageCircle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
-            }
-
-
         loadView("Views/mine-profile-details-view.fxml");
+
+        Image image = new Image(Main.class.getResourceAsStream("images/profile.JPG"));
+        imageCircle.setFill(new ImagePattern(image));
 
     }
 
+    /**
+     * This method will take resources that are views as a parameter and set it at the center of the borderpane
+     * @param resourceName
+     */
     private void loadView(String resourceName){
         Parent root = null;
 
@@ -113,15 +106,22 @@ public class HomeViewController extends Component implements Initializable {
     }
 
 
-
-
+    /**
+     * This method will call the scene home-view.fxml if clicked on the instagram panel
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void InstagramPanelClicked(MouseEvent event) throws IOException {
         SceneChanger.changeScenes(event, "Views/home-view.fxml","Ram's Profile");
 
     }
 
-
+    /**
+     * This method will logout the profile and take you to the login page
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void logoutButtonClicked(MouseEvent event) throws IOException {
 
@@ -131,5 +131,6 @@ public class HomeViewController extends Component implements Initializable {
             SceneChanger.changeScenes(event, "Views/login-view.fxml", "Login Page");
         }
     }
+
 
 }

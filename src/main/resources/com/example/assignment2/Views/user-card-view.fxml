@@ -60,5 +60,6 @@
       <String fx:value="shadow" />
       <String fx:value="user-card-background-radius" />
       <String fx:value="mouse-moved" />
+      <String fx:value="rect-round" />
    </styleClass>
 </HBox>

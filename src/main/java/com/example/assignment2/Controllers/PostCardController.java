@@ -10,13 +10,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PostCardController implements Initializable {
+public class PostCardController  {
 
     @FXML
     private Label commentsLabel;
@@ -27,10 +28,6 @@ public class PostCardController implements Initializable {
     @FXML
     private Label likesLabel;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
 
     public void setData(Post post){
 
@@ -43,7 +40,7 @@ public class PostCardController implements Initializable {
                 if (response != "Error")
                     imageView.setImage(new Image(post.getPicture()));
                 else
-                    imageView.setImage(new Image(Main.class.getResourceAsStream("images/noProfileImage.png")));
+                    imageView.setImage(new Image(Main.class.getResourceAsStream("images/default.png")));
             }
 
 

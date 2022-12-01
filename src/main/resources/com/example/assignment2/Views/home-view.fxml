@@ -76,7 +76,7 @@
             </Pane>
          </top>
          <center>
-            <AnchorPane fx:id="childAnchorPane" prefHeight="590.0" prefWidth="758.0" styleClass="white-background" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="590.0" prefWidth="758.0" styleClass="white-background" BorderPane.alignment="CENTER" />
          </center>
          <bottom>
             <HBox fx:id="bottomHBox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">

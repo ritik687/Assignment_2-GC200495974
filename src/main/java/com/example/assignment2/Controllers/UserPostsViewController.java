@@ -26,6 +26,7 @@ import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UserPostsViewController implements Initializable, MediaInitializable, UserProfileDetailsInitializable {
@@ -51,39 +52,29 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
     @FXML
     private Circle imageCircle;
 
+    @FXML
+    private Label msgLabel;
+
     private int columns = 0;
     private int rows = 1;
 
     private UserProfileDetails duplicateUserProfileDetail;
 
+    private ArrayList<Post> countOfImages ;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
                 verifiedImageView.setVisible(false);
+                msgLabel.setVisible(false);
 
                 backImageButton.setCursor(Cursor.HAND);
                 homeButtonHBox.setCursor(Cursor.HAND);
                 searchButtonHBox.setCursor(Cursor.HAND);
 
+                Image image = new Image(Main.class.getResourceAsStream("images/profile.JPG"));
+                imageCircle.setFill(new ImagePattern(image));
 
-
-        String profilePictureURL = null;
-        try {
-            profilePictureURL = APIUtility.getMineProfilePictureURL();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        String response = APIUtility.sendGETRequest(profilePictureURL);
-
-        if (response != "Error")
-        {
-            Image image = new Image(profilePictureURL);
-            imageCircle.setFill(new ImagePattern(image));
-        } else {
-            imageCircle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
-        }
     }
 
 
@@ -91,12 +82,13 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
     @Override
     public void loadMediaDetails(Media media) {
 
+        countOfImages = new ArrayList<>();
 
         for (Post post : media.getPosts()) {
 
             if (!post.getIsVideo())
             {
-
+                countOfImages.add(post);
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(Main.class.getResource("Views/post-card-view.fxml"));
 
@@ -114,10 +106,16 @@ public class UserPostsViewController implements Initializable, MediaInitializabl
                     GridPane.setMargin(postCardVBox, new Insets(30));
 
 
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+        }
+
+
+        if(countOfImages.size()==0){
+                msgLabel.setVisible(true);
         }
     }
 

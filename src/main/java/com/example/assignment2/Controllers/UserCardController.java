@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
@@ -34,10 +35,6 @@ public class UserCardController implements Initializable {
     @FXML
     private HBox hBox;
 
-
-//    private ArrayList<User> clickedUser;
-
-    //"ddf542","42adf5","f5aa42","ff5056","bdb2fe","b9e5ff"
     private String[] colors;
 
 
@@ -50,9 +47,9 @@ public class UserCardController implements Initializable {
 
         String profilePicture= user.getProfilePicture();
 
-        /*if(user.getHasAnonymousProfilePicture())
+        if(user.getHasAnonymousProfilePicture())
             profileImageView.setImage(new Image(Main.class.getResourceAsStream("images/noProfileImage.png")));
-        else*/
+        else
             profileImageView.setImage(new Image(profilePicture));
 
 
@@ -66,13 +63,14 @@ public class UserCardController implements Initializable {
             verifiedImageView.setVisible(false);
         }
 
+
         hBox.setStyle("-fx-background-color: "+colors[(int)(Math.random()*colors.length)]);
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colors = new String[]{"#f6f509","#f7c59d","#bfa5f7","#b9c5f9","#ff7b78","#6c7293","#ACDDDE","#CAF1DE","#FEF8DD","#F7D8BA"};
+        colors = new String[]{"#8bb6fc","#edbeb9","#ede0b9","#e1ebc0","#e6cef0","#a9c5db","#d3c9f0"};
 
         hBox.setCursor(Cursor.HAND);
 

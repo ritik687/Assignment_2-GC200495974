@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
 import java.io.IOException;
@@ -79,7 +80,10 @@ public class LoginViewController implements Initializable {
     @FXML
     private HBox instagramLabelHBox;
 
-
+    /**
+     *This method will show the password
+     * @param event
+     */
                 @FXML
                 void showLabelClicked(MouseEvent event) {
                     passwordTextField.setText(passwordField.getText());
@@ -87,25 +91,39 @@ public class LoginViewController implements Initializable {
                     textFieldHBox.setVisible(true);
                 }
 
+    /**
+     * This method will hide the password
+     * @param event
+     */
                 @FXML
                 void hideLabelClicked(MouseEvent event) {
                        passwordField.setText(passwordTextField.getText());
                        passwordFieldHBox.setVisible(true);
                        textFieldHBox.setVisible(false);
                 }
-                @FXML
-                void googlePlayButtonClicked(ActionEvent event) throws URISyntaxException, IOException {
+
+    /**
+     * This method will open the google play store link in the browser
+     * @param event
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    @FXML
+    void googlePlayButtonClicked(ActionEvent event) throws URISyntaxException, IOException {
 
                     Desktop.getDesktop().browse(new URI("https://play.google.com/store/apps/details?id=com.instagram.android"));
                 }
 
-                @FXML
+    /**
+     * This method will open the microsoft store link in the browser
+     * @param event
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    @FXML
                 void microsoftButtonClicked(ActionEvent event) throws URISyntaxException, IOException {
                     Desktop.getDesktop().browse(new URI("https://apps.microsoft.com/store/detail/instagram/9NBLGGH5L9XT?hl=en-ca&gl=ca"));
                 }
-
-
-
 
 
 
@@ -119,6 +137,7 @@ public class LoginViewController implements Initializable {
                             microsoftButton.setCursor(Cursor.OPEN_HAND);
                             showCredentialsLabel.setCursor(Cursor.HAND);
                             instagramLabelHBox.setCursor(Cursor.HAND);
+                            loginButton.setCursor(Cursor.HAND);
 
                             msgLabel1.setText("");
                             msgLabel2.setText("");
@@ -134,11 +153,15 @@ public class LoginViewController implements Initializable {
                             textFieldsTextPropertyListener();
 
 
-
-
+                /**
+                 * Setting event handler on the login button if its clicked then changed the scene to home-view.fxml
+                 */
                 loginButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                                 @Override
                                 public void handle(MouseEvent event) {
+
+                                    JFrame frame = new JFrame();
+                                    JOptionPane.showMessageDialog(frame, "\" Directing you to Ram's Profile Details. This will take a little time :) \"");
 
                                     if(userNameField.getText().equals("ritik_mall_") && passwordField.getText().equals("ritik")){
                                         try {
@@ -166,6 +189,9 @@ public class LoginViewController implements Initializable {
                                 }
                             });
 
+                /**
+                 * This method will set even handler mouse click on the instagram label button which refresh the login page
+                 */
                 instagramLabelHBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
@@ -178,7 +204,9 @@ public class LoginViewController implements Initializable {
                 });
 
 
-
+                /**
+                 * This method will set the event handler mouse clicked on the show credentials label
+                 */
                             showCredentialsLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
                                 @Override
                                 public void handle(MouseEvent event) {
@@ -197,7 +225,10 @@ public class LoginViewController implements Initializable {
             }
 
 
-            public void textFieldsTextPropertyListener(){
+    /**
+     * This method will add listener to the text field text property() that is login button will become disable when the text is typed or not.
+     */
+    public void textFieldsTextPropertyListener(){
 
                 userNameField.textProperty().addListener((observableValue, oldValue, newValue) -> {
                     if(newValue.length()>0) {

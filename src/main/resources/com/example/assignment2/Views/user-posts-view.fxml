@@ -122,5 +122,10 @@
             </ScrollPane>
          </center>
       </BorderPane>
+      <Label fx:id="msgLabel" alignment="CENTER" layoutX="2.0" layoutY="183.0" prefHeight="100.0" prefWidth="891.0" text="There are no images in the medias to display. Images are limited in API call. ">
+         <font>
+            <Font name="Times New Roman" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

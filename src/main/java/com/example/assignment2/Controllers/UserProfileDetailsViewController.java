@@ -11,6 +11,7 @@ import com.example.assignment2.Utilities.SceneChanger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -18,9 +19,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,9 +35,6 @@ public class UserProfileDetailsViewController implements Initializable, UserProf
     @FXML
     private Circle circle;
 
-
-    @FXML
-    private Label PostsLabel;
 
     @FXML
     private Label categoryLabel;
@@ -65,120 +65,181 @@ public class UserProfileDetailsViewController implements Initializable, UserProf
     private Label postsLabel;
 
     @FXML
-    private Button viewPostsButton;
+    private Button viewImagesButton;
 
+    @FXML
+    private ImageView privacyImageView;
 
+    @FXML
+    private Label msgLabel;
 
-
+    @FXML
+    private VBox centeredVBox;
 
     private Media media;
 
     private UserProfileDetails userProfileDetails;
 
-//    private User user;
-
     private String searchTerm= null;
-
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         backImageButton.setCursor(Cursor.HAND);
-        viewPostsButton.setCursor(Cursor.HAND);
+        viewImagesButton.setCursor(Cursor.HAND);
+        privacyImageView.setCursor(Cursor.HAND);
+        msgLabel.setVisible(false);
+
+
 
     }
 
-    // loading user details if clicked from the simple list view
+
+    /**
+     *  loading user details if clicked from the simple list view
+     */
+
     @Override
     public void loadUserDetailsFromListView(String passedSearchTerm, User passedUser) {
 
 
-//        UserProfileDetails userProfileDetails = null;
         try {
-             APIUtility.getUserProfileDetailsFromUserName(passedUser.getUserName());
-             userProfileDetails =APIUtility.getUserProfileDetailsFromFile();
-
+            APIUtility.getUserProfileDetailsFromUserName(passedUser.getUserName());
+            userProfileDetails =APIUtility.getUserProfileDetailsFromFile();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-          // calling one method to set the different fields and display the information
-          displayData(userProfileDetails,passedUser);
+        displayData(userProfileDetails,passedUser);
 
     }
 
+    /**
+     * Laoding user details if selected from the passedUser
+     * @param passedUser
+     */
     @Override
     public void loadUserDetailsFromGraphicView(User passedUser) {
 
-        if(User.getClickedUserFromBothListViews().size()>0)
+        if(User.getClickedUserFromGrahicView().size()>0)
         {
+
 
             try {
                 APIUtility.getUserProfileDetailsFromUserName(passedUser.getUserName());
                 userProfileDetails =APIUtility.getUserProfileDetailsFromFile();
-//                System.out.println(userProfileDetails);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            displayData(userProfileDetails,passedUser);
-
-        }
-    }
-
-
-    // this function is to remove the same line of codes in two methods that are setting different objects..
-    public void displayData(UserProfileDetails userProfileDetails, User passedUser){
-
-        String profilePictureURL = userProfileDetails.getProfilePicture();
-        String response = APIUtility.sendGETRequest(profilePictureURL);
-
-        if (passedUser.getHasAnonymousProfilePicture() != true)
-        {
-            if (response != "Error")
+                displayData(userProfileDetails,passedUser);
+            } catch (Exception e)
             {
-                Image image = new Image(profilePictureURL);
-                circle.setFill(new ImagePattern(image));
-            } else {
-                circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
+                System.out.println(e.getMessage());
             }
+
         }
-        else
-        {
-            circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
-        }
+    }
 
 
-        userNameLabel.setText(passedUser.getUserName());
-
-        userNameLabel.setText(userProfileDetails.getUserName());
-        fullNameLabel.setText(userProfileDetails.getFullName());
-        followersLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowers()));
-        followingLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowing()));
-        categoryLabel.setText(userProfileDetails.getCategoryName());
-        postsLabel.setText(Integer.toString(userProfileDetails.getMedias().getTotalPosts()));
+    /**
+     * This method will display the data with respect to which list view is selected
+     * @param userProfileDetails
+     * @param passedUser
+     */
+    private void displayData(UserProfileDetails userProfileDetails, User passedUser){
 
 
-        textAreaForBio.setText(userProfileDetails.getBioText());
-        textAreaForBio.setBorder(null);
+
+            if(userProfileDetails.getMessage()!=null)
+            {
+                if (userProfileDetails.getMessage().equals("You are already used all your quota this hour, please request again in the next hour.")) {
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, "You are already used all your limit for one hour that is 50 requests per hour, please make request again in the next hour.");
+                    System.exit(0);
+                }
+
+                if (userProfileDetails.getMessage().equals("You have exceeded the rate limit per second for your plan, ULTRA, by the API provider")) {
+
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, "\t\t\"You  can only make one request per second or 50 requests per hour.\"\n\t\tSo, if you click search, try to click it once only and wait for second]");
+
+                }
+
+                if(userProfileDetails.getMessage().equals("Cannot destructure property 'cookie' of '(intermediate value)' as it is undefined."))
+                {
+                    centeredVBox.setVisible(false);
+                    viewImagesButton.setVisible(false);
+                    userNameLabel.setVisible(false);
+                    verifiedImageView.setVisible(false);
+                    privacyImageView.setVisible(false);
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, "\t\t\"Please go back and try to select the user again in the list. Backend API error that is only due to the URL of the image.\"");
+
+                    msgLabel.setVisible(true);
+
+                }
+            }
+
+            else {
+                String profilePictureURL = userProfileDetails.getProfilePicture();
+                String response = APIUtility.sendGETRequest(profilePictureURL);
+
+                if (passedUser.getHasAnonymousProfilePicture() != true) {
+                    if (response != "Error") {
+                        Image image = new Image(profilePictureURL);
+                        circle.setFill(new ImagePattern(image));
+                    } else {
+                        circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
+                    }
+                } else {
+                    circle.setFill(new ImagePattern(new Image(Main.class.getResourceAsStream("images/noProfileImage.png"))));
+                }
 
 
-        if (userProfileDetails.getIsVerifiedAccount()) {
-            verifiedImageView.setVisible(true);
-            verifiedImageView.setImage(new Image(Main.class.getResourceAsStream("images/verified.png")));
-        } else {
-            verifiedImageView.setVisible(false);
-        }
+                userNameLabel.setText(passedUser.getUserName());
+
+                userNameLabel.setText(userProfileDetails.getUserName());
+                fullNameLabel.setText(userProfileDetails.getFullName());
+
+                followersLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowers()));
+                followingLabel.setText(APIUtility.formatNumber(userProfileDetails.getFollowing()));
+
+                categoryLabel.setText(userProfileDetails.getCategoryName());
+                postsLabel.setText(Integer.toString(userProfileDetails.getMedias().getTotalPosts()));
+
+
+                textAreaForBio.setText(userProfileDetails.getBioText());
+                textAreaForBio.setBorder(null);
+
+
+                if (userProfileDetails.getIsPrivateAccount()) {
+                    privacyImageView.setImage(new Image(Main.class.getResourceAsStream("images/lock2.png")));
+                    privacyImageView.setVisible(true);
+
+                } else {
+                    privacyImageView.setImage(new Image(Main.class.getResourceAsStream("images/unlock.png")));
+                    privacyImageView.setVisible(true);
+                }
+
+
+                if (userProfileDetails.getIsVerifiedAccount()) {
+                    verifiedImageView.setVisible(true);
+                } else {
+                    verifiedImageView.setVisible(false);
+                }
+
+
+                centeredVBox.setVisible(true);
+                viewImagesButton.setVisible(true);
+                userNameLabel.setVisible(true);
+            }
 
     }
 
 
-    // this is when back button pressed from the post page
+    /**
+     * This method will work when back button pressed from the post page and display the same data
+     */
+
     @Override
     public void loadUserProfileDetails(UserProfileDetails passedUserProfileDetail) {
 
@@ -220,26 +281,54 @@ public class UserProfileDetailsViewController implements Initializable, UserProf
 
     }
 
-    @Override
-    public void loadAllUsers(String passedSearchTerm) {
-        searchTerm =passedSearchTerm;
 
-    }
-
-
-
+    /**
+     * This method will view posts and the change the scene to users-post-view.fxml
+     * @param event
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @FXML
     void viewPostsButtonClicked(MouseEvent event) throws IOException, InterruptedException {
-//        userProfileDetails= APIUtility.getUserProfileDetailsFromFile();
+
+        JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame, " Images takes little time to load :) ");
         media = userProfileDetails.getMedias();
 
         SceneChanger.changeScenes(event,"Views/user-posts-view.fxml",userProfileDetails.getFullName()+"'s Images",media,userProfileDetails);
     }
 
 
+    /**
+     * This method will take back to the search page
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void backButtonPressed(MouseEvent event) throws IOException {
-        SceneChanger.changeScenes(event, "Views/search-view.fxml","Search Page",searchTerm);
+        SceneChanger.changeScenes(event, "Views/search-view.fxml","Search Page");
 
+    }
+
+
+    /**
+     * This method will check whether the user profile is private or public.
+     * @param event
+     */
+    @FXML
+    void privacyImageViewClicked(MouseEvent event) {
+            if(userProfileDetails.getIsPrivateAccount()){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText("This account is private.");
+                alert.show();
+            }
+
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText("This is Public Profile.");
+                alert.show();
+            }
     }
 }

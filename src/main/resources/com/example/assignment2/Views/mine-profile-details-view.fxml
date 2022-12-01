@@ -16,7 +16,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="white-background" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment2.Controllers.MineProfileDetailsController">
    <children>
-      <ScrollPane prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ScrollPane fx:id="scrollPane" prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
             <AnchorPane prefHeight="701.0" prefWidth="899.0">
                <children>
@@ -26,7 +26,7 @@
                            <children>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Circle fx:id="circle" fill="DODGERBLUE" radius="92.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                    <Circle fx:id="circle" fill="DODGERBLUE" radius="92.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="shadow" />
                                  </children>
                                  <HBox.margin>
                                     <Insets bottom="20.0" left="80.0" top="50.0" />
